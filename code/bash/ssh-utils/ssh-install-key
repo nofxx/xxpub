@@ -1,0 +1,12 @@
+# ssh-install key
+# simple script to add your public key to a SSH server
+#
+# author
+# nofxx <x@nofxx.>
+# based on
+# http://www.cneophytou.com/2008/02/05/smooth-ssh-passwordless-authentication/
+#
+# # # #
+
+cat ~/.ssh/id_rsa.pub | ssh $1 "cat - >> ~/.ssh/authorized_keys; chmod 644 ~/.ssh/authorized_keys"
+echo "Done."

@@ -1,0 +1,52 @@
+# ssh-add-host
+# simple script to add new hosts to ~/.ssh/conf
+#
+# author
+# nofxx <x@nofxx.>
+#
+# # # # 
+
+F="$HOME/.ssh/config"
+
+printf "Nickname for the host: "; read NIK
+if [ -z $NIK ]
+then
+	exit
+fi
+
+printf "Username (default $USER): "; read UNAME
+if [ -z $UNAME ]
+then
+	UNAME=$USER
+fi
+
+printf "Hostname or IP: "; read IP
+if [ -z $IP ]
+then
+	exit
+fi
+
+printf "Port (default 22): "; read PORT
+if [ -z $PORT ]
+then
+	PORT=22
+fi
+
+if [ -d $HOME/.ssh ]
+then
+        touch $F
+        else
+	mkdir $HOME/.ssh
+fi
+
+touch $F
+
+echo "" >> $F
+echo "host $NIK" >> $F
+echo "user $UNAME" >> $F
+echo "HostName $IP" >> $F
+echo "port $PORT" >> $F
+
+echo "Done."
+
+echo "Use 'ssh-install-key $NIK' to upload your id_rsa.pub to this server."

@@ -1,0 +1,27 @@
+
+vbell on
+vbell_msg   " *X* " 
+
+#caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+#caption always "%{bk}%H%{bk}: screen%{wk} %-48=%{wk} system load: %l%{wk} | %{wk}%D %m.%d %0c"
+#hardstatus alwayslastline "%?%-Lw%?%{kw}%n*%f %t%?(%u)%?%{kw}%?%+Lw%? %{wk} %-47=%{wk} system load: %l%{wk} | %{wk}%D %
+
+hardstatus alwayslastline
+hardstatus string '%{Yk}[ %{W}%H %{Y}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{w}][%{Y}%l%{w}]%{=w C}[ %m/%d %c ]%{W}'
+
+
+screen -t xxx 0
+screen -t xx
+screen -t x 
+screen -t top top
+screen -t su su -
+
+startup_message off
+
+# X friendly
+bindkey -k k7 detach
+bindkey -k k8 kill
+bindkey -k k5 screen
+bindkey -k k; title
+bindkey -k F3 prev
+bindkey -k F4 next

@@ -1,0 +1,48 @@
+#!/bin/bash
+#Author: nofxx <x@nofxx.com> (Send comments, fixes)
+
+# config
+. /etc/rc.d/functions
+
+
+PID=`pidof -o %PPID /usr/sbin/rinetd`
+case "$1" in
+  start)
+    stat_busy "Starting RINETD"
+    if [ -z "$PID" ]; then 
+       /usr/sbin/rinetd &
+    fi
+    if [ ! -z "$PID" -o $? -gt 0 ]; then
+       stat_fail
+    else
+       add_daemon rinetd
+       stat_done
+    fi
+    ;;
+  stop)
+    stat_busy "Stopping RINETD"
+    [ ! -z "$PID" ]  && kill -9 $PID &> /dev/null
+    if [ $? -gt 0 ]; then
+      stat_fail
+    else
+      rm_daemon rinetd
+      stat_done
+    fi
+    ;;
+  restart)
+    $0 stop
+    sleep 3
+    $0 start
+    ;;
+  reload)
+    stat_busy "Reload RINETD Config"
+    if [ ! -z "$PID" ] && kill -1 [ $? -gt 0 ]; then
+      stat_fail
+    else
+      stat_done
+    fi
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|reload}"  
+esac
+
