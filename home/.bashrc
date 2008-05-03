@@ -10,23 +10,23 @@ fi
 # PATHS
 # #
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/home/nofxx/scripts"
-export EDITOR="vim"
+export EDITOR="vi"
 
 # PS1
 # #
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-#PS1="\w\$(parse_git_branch) $ "
+#PS1="\u@\h \w\$(parse_git_branch) $ "
 #PS1=’[\u@\h \W]\$ ‘
 #PS1='[\u@\h \W]\$ '
 #PS1='\[\e[0;32m\]\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[m\] \[\e[1;32m\]\$ \[\e[m\] '
 #PS1="\n\[\033[0;34m\]:: \#\$\\[\e[m\]\[\033[34m\] : \u@\h @ \[\033[39m\]\w \[\033[38m\]: \$(/bin/ls -1 |
 #/usr/bin/wc -l | /usr/bin/sed 's: ::g') : \[\033[38m\]\$(/bin/ls -lah |
 #/usr/bin/grep -m 1 total | /usr/bin/sed 's/total //')b\[\033[0m\]\n:: \[\033[0m\]"
-PS1='\[\e[0;32m\]\h\[\e[m\] \[\e[1;36m\]\w $(parse_git_branch)\[\e[m\] \[\e[m\] \[\e[1;32m\]\$ \e[m\]'
+#PS1='\[\e[0;32m\]\h\[\e[m\] \[\e[1;36m\]\w $(parse_git_branch)\[\e[m\] \[\e[m\] \[\e[1;32m\]\$ \e[m\]'
 #PS1='\[\e[0;32m\]\h\[\e[m\] \[\e[1;37m\]\w\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
-
+PS1='\[\e[0;32m\]\u::\h\[\e[m\] \[\e[1;37m\]\w\[\e[m\] $(parse_git_branch) \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
 # # ALIAS
 # # # 
 #
