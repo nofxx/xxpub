@@ -138,6 +138,19 @@ alias irb='irb --readline -r irb/completion -rubygems'
 function cdgem {
   cd /usr/local/lib/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
 }
+
+export GEMDIR=`gem env gemdir`
+
+gemdoc() {
+  open $GEMDIR/doc/`$(which ls) $GEMDIR/doc | grep $1 | sort | tail -1`/rdoc/index.html
+}
+
+_gemdocomplete() {
+  COMPREPLY=($(compgen -W '$(`which ls` $GEMDIR/doc)' -- ${COMP_WORDS[COMP_CWORD]}))
+  return 0
+}
+
+complete -o default -o nospace -F _gemdocomplete gemdoc
    
 # RAILS
 # # 
@@ -149,6 +162,7 @@ alias a='autotest -rails' # makes autotesting even quicker
 
 alias mongs='mongrel_rails cluster::configure -e production -N 3 -c $(pwd) --user mongrel --group mongrel -p'
 
+alias doom='rake db:drop && rake db:create && rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate && rake db:migrate RAILS_ENV="test"'
 
 # # FUNCTIONS
 # # # 
