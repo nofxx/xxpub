@@ -45,7 +45,7 @@ alias ys='sudo port selfupdate'
 # TEXTMATE 
 # #
 alias e='mate . &' # open current dir
-alias et='mate README app/ config/ db/ lib/ public/ test/ vendor/plugins &' # open current dir assuming rails
+alias et='mate CHANGELOG README app/ config/ db/ lib/ spec/ stories/ public/ test/ vendor/ &' # open current dir assuming rails
 
 # Make bash check it's window size after a process completes
 shopt -s checkwinsize
