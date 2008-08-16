@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="400" height="300">
+	<mx:states>
+		<mx:State name="collapsed">
+			<mx:RemoveChild target="{canvas1}"/>
+			<mx:RemoveChild target="{canvas2}"/>
+			<mx:RemoveChild target="{accordion1}"/>
+			<mx:SetProperty name="width" value="50"/>
+			<mx:SetProperty name="height" value="50"/>
+			<mx:AddChild position="lastChild">
+				<mx:Button x="10" y="-24" label="Button"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Accordion left="0" right="0" top="0" bottom="0" id="accordion1">
+		<mx:Canvas label="Global" width="100%" height="100%">
+		</mx:Canvas>
+		<mx:Canvas label="Video" width="100%" height="100%" id="canvas2">
+		</mx:Canvas>
+		<mx:Canvas label="Audio" width="100%" height="100%" id="canvas1">
+		</mx:Canvas>
+	</mx:Accordion>
+	
+</mx:Panel>

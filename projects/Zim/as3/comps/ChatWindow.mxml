@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="400" height="300"
+	headerHeight="10" xmlns:ns1="comps.src.pad.controls.*">
+		 <mx:VDividedBox id="vbox1" width="100%" height="100%">
+		 	
+		
+		 <mx:HDividedBox
+		        width="100%" height="100%">
+		        <mx:VBox 
+		            width="75%"    height="100%">
+		            <mx:TabNavigator
+		                width="100%" height="100%">
+		                <mx:VBox label="Main Chat" >
+		                    <mx:TextArea 
+		                        id="txtChatBox"
+		                        styleName="chatBox"
+		                        editable="false"
+		                        updateComplete="txtChatBox.verticalScrollPosition = txtChatBox.maxVerticalScrollPosition + 1;"
+		                        width="100%" height="100%"/>
+		                    <mx:RichTextEditor height="110">
+		                    </mx:RichTextEditor>
+		                </mx:VBox>
+		            </mx:TabNavigator>
+		            
+		            <mx:Form defaultButton="{ btnMessage }"
+		                    width="100%">                    
+		                <mx:HBox width="100%">
+		                    <mx:TextInput width="100%" id="txtMsg"/>
+		                    <mx:Button 
+		                        id="btnMessage"
+		                        label="Send Message"
+		                       click="//sendMessage( txtMsg.text )" 
+		                        />
+		                </mx:HBox>                        
+		            </mx:Form>
+		        
+		        </mx:VBox>
+		    </mx:HDividedBox>
+		    
+		     </mx:VDividedBox>
+		    
+		
+		
+	
+</mx:Panel>

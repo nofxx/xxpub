@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="414" height="400">
+	<mx:Image x="27.5" y="24" source="midia/relogio.png"/>
+	<mx:Image x="190" y="192" source="midia/ponteirohor.png"/>
+	<mx:Image x="203" y="66" source="midia/ponteiromin.png"/>
+	<mx:Image x="186" y="291" source="midia/spiner.png"/>
+	<mx:Image x="157" y="66" source="midia/banderola.png"/>
+	
+</mx:Canvas>

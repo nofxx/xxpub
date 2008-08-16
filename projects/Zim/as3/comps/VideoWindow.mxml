@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel  xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:VideoContainer="comps.src.*"
+	layout="absolute" width="240" height="240" creationComplete="hide();" rollOut="hide();" 
+	rollOver="{mostrame();}"  mouseDown="dragit();"  mouseUp="this.stopDrag();"
+	 title="Nombre">
+	
+		<mx:Script>
+	<![CDATA[
+	
+	
+	 
+       import flash.media.Video;
+       import comps.classes.zim.VideoContainer;
+       import comps.classes.zim.VideoContainer;
+      
+      private var videoLocal:Video;
+   //  public var VideoContainer:VideoContainer = new VideoContainer();
+      
+      
+      public function testCam():void {
+     
+      	 videoLocal = new Video(300,200);
+         var camera:Camera = Camera.getCamera();
+     	// var x:Number = this.stage.width;
+        // var y:Number = this.stage.height;
+     	// camera.setMode(x,y,2);
+     	// camera.setMotionLevel(1,1);
+        // camera.addEventListener(ActivityEvent.ACTIVITY, activityHandler);
+        // camera.addEventListener(
+        // vid1.attachCamera(camera);
+         videoLocal.attachCamera(camera);
+      //   vid1.video = videoLocal;
+		    	    	    	
+      	
+      }
+      
+       private function activityHandler(event:ActivityEvent):void {
+            trace("cam ac " + event);
+           // trace ("cam mot = " + camera.
+        }
+	    private function dragit():void {
+	    	
+	    	
+	    	var limit:Number = this.y + 20;
+	    	if (mouseY < limit ){
+	    	this.startDrag(false,null);
+	    	}
+	    
+	    	
+	    	
+	    }
+		private function mostrame():void {
+			camUI.visible = true;
+		}
+		private function hide():void {
+			camUI.visible = false;
+		}
+		private function imhere():void{
+			trace ("roxxx");
+		}
+	]]>
+</mx:Script>
+
+		<!--<mx:VideoDisplay id="vid1" right="0" left="0" top="0" bottom="0"/> -->
+		<mx:Canvas id="camUI" right="0" left="0" top="0" bottom="0" >
+			<mx:Canvas width="38" height="89"  right="0" top="10">
+				<mx:Button x="10" y="22" label="V" width="20" height="25"/>
+				<mx:Button x="10" y="55" label="A" width="20" height="25"/>
+				<mx:Label x="6" y="4" text="Up"/>
+			</mx:Canvas>
+			<mx:Canvas width="38" height="89"   right="0" bottom="10">
+				<mx:Button x="10" y="22" label="V" width="20" height="25"/>
+				<mx:Button x="10" y="55" label="A" width="20" height="25"/>
+				<mx:Label x="6" y="4" text="Down"/>
+			</mx:Canvas>
+		</mx:Canvas>
+	
+</mx:Panel>

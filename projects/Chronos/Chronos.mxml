@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="rock()" layout="absolute" xmlns:ns1="componentes.relogio.*" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#FFFFFF, #E9E9E9]" width="1000" height="600">
+<mx:Script>
+	<![CDATA[
+		
+		
+		private function rock():void {
+			
+			
+			this.currentState='inicial';
+			
+		}
+		
+		private function gogogo():void {
+			
+			
+			this.currentState='';
+			
+		}
+		
+		
+	]]>
+</mx:Script>
+
+
+	<mx:states>
+		<mx:State name="inicial">
+			<mx:AddChild position="lastChild">
+				<mx:Panel height="413" layout="absolute" left="30" bottom="30" right="30" title="Jogar">
+					<mx:Button label="Nova Partida" width="158" height="44" click="gogogo()" right="10" bottom="10"/>
+					<mx:NumericStepper x="62" y="338" width="158" height="25"/>
+					<mx:RadioButtonGroup id="radiogroup1"/>
+					<mx:RadioButton x="228" y="340" label="Jogada" groupName="radiogroup1"/>
+					<mx:RadioButton x="301" y="338" label="Partida" groupName="radiogroup1"/>
+					<mx:RadioButtonGroup id="radiogroup2"/>
+					<mx:RadioButton x="64" y="192" label="Button 1" groupName="radiogroup2"/>
+					<mx:RadioButton x="64" y="216" label="Button 2" groupName="radiogroup2"/>
+					<mx:RadioButton x="64" y="240" label="Blitz" groupName="radiogroup2"/>
+					<mx:RadioButton x="64" y="266" label="Blitz" groupName="radiogroup2"/>
+					<mx:RadioButtonGroup id="tipo_relogio"/>
+					<mx:RadioButton x="58" y="36" label="Analógico" groupName="tipo_relogio"/>
+					<mx:RadioButton x="58" y="60" label="Digital" groupName="tipo_relogio"/>
+					<mx:TextArea x="228" y="35" height="219" width="664"/>
+					<mx:Label x="16" y="166" text="Tipo de jogo"/>
+					<mx:Label x="228" y="10" text="Descrição"/>
+					<mx:Label x="10" y="10" text="Estilo do relógio"/>
+					<mx:Label text="Tempo" left="10" bottom="17"/>
+					<mx:RadioButton x="64" y="292" label="Blitz" groupName="radiogroup2"/>
+				</mx:Panel>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Image source="midia/chronos.png" left="10" top="10"/>
+	<mx:Label x="96" y="305" text="5:00" fontSize="64" fontWeight="bold" fontFamily="Verdana"/>
+</mx:WindowedApplication>
