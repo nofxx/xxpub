@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title><%=state%> Hot Springs</title>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAAjH9Gpt_KLxuAcF5Sh1TAgRT8Y0Two5J58jdzAOLpn2ulbGQRwxQTP8YhnFuVIb9YliRPJ8RRY99glQ" type="text/javascript"></script>
+    <script type="text/javascript">
+      var map;
+      var geoXml = new GGeoXml("http://www.disjointthoughts.com/static_blog_files/hotsprings/<%=state.downcase%>.kml");
+
+      function onLoad() {
+        if (GBrowserIsCompatible()) {
+          map = new GMap2(document.getElementById("map"));
+          map.addControl(new GLargeMapControl());
+          map.setCenter(new GLatLng(34,-111), 6);
+          map.addOverlay(geoXml);
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="map.css" type="text/css" media="screen" />
+  </head>
+  <body onload="onLoad()" onunload="GUnload()">
+    <div id="ads">
+        <center>
+            <script type="text/javascript"><!--
+            google_ad_client = "pub-9993097029175042";
+            google_ad_width = 468;
+            google_ad_height = 60;
+            google_ad_format = "468x60_as";
+            google_ad_type = "text_image";
+            //2007-08-08: hot springs
+            google_ad_channel = "6590921785";
+            //-->
+            </script>
+            <script type="text/javascript"
+              src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </center>
+    </div>
+    <div id="map"></div>
+  </body>
+</html>

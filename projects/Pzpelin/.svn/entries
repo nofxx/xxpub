@@ -1,0 +1,42 @@
+8
+
+dir
+12
+http://svn.nofxx.com/xxsvn/project/Pzpelin
+http://svn.nofxx.com/xxsvn
+
+
+
+2007-08-04T09:02:22.756278Z
+12
+nofxx
+
+
+svn:special svn:externals svn:needs-lock
+
+pzpelin.ods
+file
+
+
+
+
+2007-03-13T16:52:03.171875Z
+f1f8dfaf766e07bb2dff0b8c798912e9
+2007-08-04T09:02:22.756278Z
+12
+nofxx
+has-props
+
+pzpelin.cdr
+file
+
+
+
+
+2007-03-13T16:51:52.843750Z
+78c25c62146f3f92ed5bb2a28add27af
+2007-08-04T09:02:22.756278Z
+12
+nofxx
+has-props
+
