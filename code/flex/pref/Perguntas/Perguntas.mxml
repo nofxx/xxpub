@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="rock()" layout="absolute" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#D2D1FF, #FFFFFF]">
+<mx:Script>
+	<![CDATA[
+	
+	public var perXML:XML;
+	public var contador:int = 0;
+	public var cArray:Array = new Array();
+		
+		public function carregaPerguntas():void
+        {
+            var request:URLRequest = new URLRequest("./dados/pergs.xml");
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, completeHandler);
+            try
+            {
+                loader.load(request);
+            }
+            catch (error:ArgumentError)
+            {
+                trace("Erro mto errado...");
+            }
+            catch (error:SecurityError)
+            {
+                trace("Erro de segurança nacional...");
+            }
+        }
+        
+        private function completeHandler(event:Event):void
+        {
+            var dataXML:XML = XML(event.target.data);
+            //trace(dataXML.toXMLString());
+           perXML = dataXML;
+           embaralha(dataXML);
+            
+        }
+
+		public function rock():void {
+		
+			carregaPerguntas();
+			this.currentState = 'pergunta';
+		}
+		
+		private function responda():void{
+			
+			this.currentState='';
+			
+			
+		}
+		private function proximo():void {
+			currentState='pergunta'
+			
+			var naArray:int = cArray[contador];
+			trace (naArray);
+			perg_txt.htmlText = perXML.pergunta[naArray].desc;
+            respo_txt.htmlText = perXML.pergunta[naArray].resposta;
+            contador++;
+			
+			
+		}
+		
+		
+		public function embaralha(oque:XML):void {
+			 
+			 var qtd:int = oque.children().length();
+			 trace (qtd);
+			
+			 var i:int;
+			 for (i=0 ; i<qtd ; i++) {
+			 	cArray[i]=i;
+			 }
+			 
+			cArray.sort(shuff);
+			proximo();
+			 
+		
+			
+		}
+		private function shuff(a:*,b:*):int
+		{
+			return Math.floor(Math.random()*2)-1;
+		}
+		
+		
+	]]>
+</mx:Script>
+
+
+	<mx:states>
+		<mx:State name="pergunta">
+			<mx:RemoveChild target="{panel2}"/>
+			<mx:AddChild relativeTo="{controlbar1}" position="lastChild">
+				<mx:Button label="Resposta" click="responda()"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Image x="0" y="0" source="midia/fundo.png"/>
+	<mx:VDividedBox top="90" bottom="10" right="10" left="10">
+		<mx:Panel layout="absolute" title="Pergunta" id="panel1" width="100%" height="300" cornerRadius="4">
+			<mx:TextArea id="perg_txt" fontFamily="Verdana" fontSize="36" right="105" left="10" top="10" bottom="10" fontWeight="bold" borderStyle="none"/>
+			<mx:Image right="10" top="10" source="midia/ponto.png"/>
+			<mx:ControlBar height="39" y="306" horizontalAlign="right" verticalAlign="middle" id="controlbar1">
+			</mx:ControlBar>
+		</mx:Panel>
+		<mx:Panel layout="absolute" title="Resposta" id="panel2" width="100%" height="50%">
+			<mx:TextArea left="10" right="10" top="10" bottom="10" id="respo_txt" fontFamily="Arial" fontSize="36" textAlign="left" borderStyle="none"/>
+			<mx:ControlBar height="39" y="306" horizontalAlign="right" verticalAlign="middle">
+				<mx:Button label="Próxima" id="button2" click="proximo()" alpha="1.0"/>
+			</mx:ControlBar>
+		</mx:Panel>
+	</mx:VDividedBox>
+	
+	
+</mx:Application>

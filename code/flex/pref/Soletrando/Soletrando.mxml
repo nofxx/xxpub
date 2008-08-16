@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="rock()" layout="absolute">
+<mx:Script>
+	<![CDATA[
+		import flash.geom.*;
+
+		public var perXML:XML;
+		public var cArray:Array = new Array();
+		public var contador:int= 0;
+				
+		public function goFullScreen(): void
+ 		{
+ 		  // Stage["fullScreenSourceRect"] = new Rectangle(0, 0, Stage.width, Stage.height);
+    		//Stage["displayState"] = "fullScreen";
+    	}
+        private function completeHandler(event:Event):void
+        {
+			var dataXML:XML = XML(event.target.data);
+           	perXML = dataXML;
+           	embaralha(dataXML);
+        }
+		public function rock () : void 
+		{
+			 var request:URLRequest = new URLRequest("dados/sole.xml");
+            var loader:URLLoader = new URLLoader();
+            loader.addEventListener(Event.COMPLETE, completeHandler);
+            try {loader.load(request);}
+           
+            catch (error:ArgumentError)
+            {
+                trace("Erro mto errado...");
+            }
+            catch (error:SecurityError)
+            {
+                trace("Erro de segurança nacional...");
+            }
+		}
+		
+		private function proximo():void 
+		{
+			var naArray:int = cArray[contador];
+			palavra.text = perXML.palavra[naArray];
+            contador++;
+		}
+				
+		public function embaralha(oque:XML):void 
+		{
+			 var qtd:int = oque.children().length();
+			 var i:int;
+				 for (i=0 ; i<qtd ; i++) {
+				 	cArray[i]=i;
+			 	 }
+			 
+			 cArray.sort(shuff);
+			 proximo();
+			 				
+		}
+		
+		private function shuff(a:*,b:*):int
+		{
+			return Math.floor(Math.random()*2)-1;
+		}
+				
+		public function checa () : void 
+		{
+			if (palavra.text == campo.text) {
+				resultado.text = "Espertim hein?";
+				imagem.source = "midia/certo.png";
+			}else {
+				
+				resultado.text = "Compra um dicionário ANIMAL!";
+				imagem.source = "midia/errado.png";
+			}
+		}
+	]]>
+</mx:Script>
+	<mx:Image x="0" y="0" source="midia/fundo-soletra.png"/>
+	<mx:Panel layout="absolute" title="Soletrando" left="10" right="10" top="91" bottom="10">
+		<mx:TextInput x="10" y="152" editable="true" fontFamily="Verdana" fontSize="64" width="544" height="99"  id="campo"/>
+		<mx:Text text="Papel" fontSize="64" fontFamily="Verdana" id="palavra" left="10" right="10" top="36" enabled="false" height="97"/>
+		<mx:Label x="10" y="255" text="Label" id="resultado"/>
+		<mx:Button x="562" y="152" label="FOI?" height="99" click="checa()"/>
+		<mx:Button x="686" y="251" label="Próxima" click="proximo()"/>
+		<mx:Image right="10" top="10" id="imagem"/>
+	</mx:Panel>
+	<mx:Button x="216.5" y="10" label="full" click="goFullScreen()"/>
+</mx:Application>
