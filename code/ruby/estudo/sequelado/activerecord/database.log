@@ -1,0 +1,149 @@
+  [4;36;1mSQL (0.000433)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.002796)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.020964)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000436)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.002141)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.001393)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000438)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.002304)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.002089)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.001809)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002394)[0m   [0mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT NULL, "idade" integer DEFAULT NULL, "sexo" boolean DEFAULT NULL, "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;36;1mSQL (0.001801)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000437)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.002093)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.001403)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000513)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002627)[0m   [0mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "idade" integer DEFAULT NULL, "sexo" boolean DEFAULT NULL, "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;36;1mSQL (0.001613)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000452)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000454)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000435)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000407)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000369)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000441)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;36;1mSQL (0.002109)[0m   [0;1mDROP TABLE users[0m
+  [4;35;1mSQL (0.001551)[0m   [0mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000479)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000492)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000448)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002265)[0m   [0mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "idade" integer DEFAULT NULL, "sexo" boolean DEFAULT NULL, "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;36;1mSQL (0.001671)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000441)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000442)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000448)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000477)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000522)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000456)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;35;1mSQL (0.002634)[0m   [0mCREATE TABLE roles ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "valor" integer NOT NULL) [0m
+  [4;36;1mSQL (0.001972)[0m   [0;1mUPDATE schema_info SET version = 2[0m
+  [4;36;1mSQL (0.000458)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000407)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000371)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000501)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;36;1mSQL (0.002304)[0m   [0;1mDROP TABLE roles[0m
+  [4;35;1mSQL (0.001469)[0m   [0mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000445)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.001896)[0m   [0mDROP TABLE users[0m
+  [4;36;1mSQL (0.001440)[0m   [0;1mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000435)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000435)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000476)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002444)[0m   [0mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "idade" integer DEFAULT NULL, "sexo" boolean DEFAULT NULL, "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;36;1mSQL (0.001686)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+Reached target version: 1
+  [4;36;1mSQL (0.000504)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000411)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000450)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000419)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;36;1mSQL (0.003666)[0m   [0;1mCREATE TABLE roles ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "valor" integer NOT NULL) [0m
+  [4;35;1mSQL (0.001599)[0m   [0mUPDATE schema_info SET version = 2[0m
+  [4;36;1mSQL (0.000448)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000423)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000385)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000523)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;36;1mSQL (0.002585)[0m   [0;1mDROP TABLE roles[0m
+  [4;35;1mSQL (0.001778)[0m   [0mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000490)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.026995)[0m   [0mDROP TABLE users[0m
+  [4;36;1mSQL (0.001864)[0m   [0;1mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000432)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000399)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000370)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000369)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000439)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000398)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000445)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002380)[0m   [0mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "idade" integer(150) DEFAULT NULL, "sexo" boolean DEFAULT 't', "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;36;1mSQL (0.001864)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+Reached target version: 1
+  [4;36;1mSQL (0.000433)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000404)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000451)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000374)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;36;1mSQL (0.002320)[0m   [0;1mCREATE TABLE roles ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "valor" integer NOT NULL) [0m
+  [4;35;1mSQL (0.001524)[0m   [0mUPDATE schema_info SET version = 2[0m
+  [4;36;1mSQL (0.000433)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000402)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000371)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000450)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;36;1mSQL (0.002373)[0m   [0;1mDROP TABLE roles[0m
+  [4;35;1mSQL (0.001721)[0m   [0mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000462)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;35;1mSQL (0.002119)[0m   [0mDROP TABLE users[0m
+  [4;36;1mSQL (0.001662)[0m   [0;1mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000453)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000000)[0m   [0mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mSQLite3::SQLException: table schema_info already exists: CREATE TABLE schema_info (version integer)[0m
+  [4;35;1mSQL (0.000469)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to Comeco (1)
+  [4;36;1mSQL (0.002399)[0m   [0;1mCREATE TABLE users ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(10) NOT NULL, "idade" integer(150) DEFAULT NULL, "sexo" boolean DEFAULT 't', "nasc" date DEFAULT NULL, "salario" decimal DEFAULT NULL, "bonus" float DEFAULT NULL, "historia" text DEFAULT NULL, "agora" datetime DEFAULT NULL) [0m
+  [4;35;1mSQL (0.001922)[0m   [0mUPDATE schema_info SET version = 1[0m
+  [4;36;1mSQL (0.000475)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CriaRegras (2)
+  [4;35;1mSQL (0.001953)[0m   [0mCREATE TABLE roles ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "valor" integer NOT NULL) [0m
+  [4;36;1mSQL (0.002779)[0m   [0;1mUPDATE schema_info SET version = 2[0m

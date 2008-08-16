@@ -1,0 +1,5 @@
+#database: teste
+#user
+adapter: sqlite3
+database: db/banco.sqlite3
+timeout: 5000
