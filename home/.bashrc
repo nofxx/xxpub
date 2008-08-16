@@ -129,9 +129,12 @@ alias gitco='git clone'
 alias gita='git add'
 alias gitb='git branch'
 alias gitc='git checkout'
+alias gitcm='gitc master'
+alias gitcx='gitc fxx'
 alias github="open \`git config -l | grep 'remote.origin.url' | sed -En \
   's/remote.origin.url=git(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\3\/\4/p'\`"
 
+alias svnclean='rm -rf `find . -name .svn`'
 # #
 # RUBY 
 # 

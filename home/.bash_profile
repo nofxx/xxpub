@@ -12,7 +12,7 @@ source ~/.bashrc
 
 # PATH
 # #
-export PATH="$PATH:/opt/local/bin:/opt/local/sbin"
+export PATH="$PATH:/opt/local/bin:/opt/local/sbin:/opt/local/lib/postgresql83/bin"
 
 #LS
 # #
@@ -45,7 +45,9 @@ alias ys='sudo port selfupdate'
 # TEXTMATE 
 # #
 alias e='mate . &' # open current dir
-alias et='mate CHANGELOG README app/ config/ db/ lib/ spec/ stories/ public/ test/ vendor/ &' # open current dir assuming rails
+alias et='mate CHANGELOG README app/* config/ db/ lib/ spec/ stories/ public/ test/ vendor/ &' # open current dir assuming rails
+alias xman='man -cP mate $1'
+#set MANPAGER='/usr/bin/mate'
 
 # Make bash check it's window size after a process completes
 shopt -s checkwinsize
