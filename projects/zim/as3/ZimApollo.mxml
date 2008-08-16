@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	 alpha="1" creationComplete="start();"  styleName=".global"
+	 xmlns:componentes="comps.*">
+	 <mx:Style source="plateau.css"/>
+<mx:Script>
+	<![CDATA[
+		import mx.rpc.events.ResultEvent;
+
+		import mx.containers.TitleWindow;
+		import comps.VideoWindow;
+		import mx.rpc.Fault;
+		import mx.rpc.events.FaultEvent;
+
+	
+		
+
+	// encoding
+     		 NetConnection.defaultObjectEncoding = flash.net.ObjectEncoding.AMF0;
+	
+	//	public var responder:Responder = new Responder(this.onResult,this.onFault);
+		public var responder:Responder = new Responder(onResult,onFault);
+		public var chatSO:SharedObject;
+		public var soName:String = new String("zimSO");
+		public var history:Array= new Array();
+
+	    private var zimPublish:NetStream;
+        private var videoS:Video; 
+	    private var zimPlay:NetStream;
+	    
+	   // images
+			[Embed(source="/images/ims/aim.png")]
+            [Bindable]
+            public var imsAim:Class;
+            [Embed(source="/images/ims/icq.png")]
+            [Bindable]
+            public var imsIcq:Class;
+            [Embed(source="/images/ims/msn.png")]
+            [Bindable]
+            public var imsMsn:Class;
+            [Embed(source="/images/ims/yahoo.png")]
+            [Bindable]
+            public var imsYahoo:Class;
+	    
+        public function onResult(result:Object):void {
+        //	var resultEvent:ResultEvent = new ResultEvent(result,null,null);
+        //  dispatchEvent(resultEvent);
+        var toStr:String = result.toString();
+        trace (toStr);
+       // mostraChat.text +="\n"+ toStr;
+        
+        
+		}
+            
+        public function onFault(fault:Object):void {
+        	//var faultEvent:FaultEvent = new FaultEvent(Fault(fault),null,null);
+            //dispatchEvent(faultEvent);
+        }
+		private function sendMessage():void {
+						 
+			// if(//Conector.connection.connected) {
+			// 	var sendStr:String = enterText.text;
+		 		//Conector.connection.call("test", responder, sendStr);
+		 	//	Conector.connection.call("add", responder, 3,6);
+			// } else {
+		 		trace ("not connected");
+			// }
+			
+		}
+		
+		//private function trapKeys(e:KeyboardEvent):void {
+				
+		//		if(e.keyCode  == 13 && ChatWindow.enterText.length > 0)
+	     	//	{
+					// send message
+					//	var msg = message.text;
+						//msg = getUserName() + msg;
+						//so.setData(chatID, msg);
+				//	chatSO.(ChatWindow.enterText.text);
+					// clear text input
+				//	ChatWindow.enterText.text = "";
+		  	//	 }
+		  			
+   				// ta1.text = String(e.charCode) + "/" + String(e.keyCode);
+		//}
+
+		public function startChat():void {
+			
+		//	chatSO = SharedObject.getRemote(soName, Conector.connection.uri, false);
+			//chatSO.connect(Conector.connection);
+			chatSO.addEventListener(SyncEvent.SYNC, chatSync);
+		}
+		private function chatSync(event:SyncEvent):void {
+			
+		    history.push(event.toString());
+			ChatWindow.mostraChat.text = history.join("\n");
+			trace (event.toString());
+		//	trace (chatSO.data());
+		}
+		
+		private function netStatusHandler(event:NetStatusEvent):void {
+            switch (event.info.code) {
+                case "NetConnection.Connect.Success":
+                   // connectStream();
+                   currentState="";
+                    //Conector.buttlight("green");
+                    startChat();
+                    break;
+                    
+                 default :
+                 trace(event.info.code);
+                // Conector.buttlight("red");
+                 break;
+            }
+        }
+
+        private function securityErrorHandler(event:SecurityErrorEvent):void {
+            trace("securityErrorHandler: " + event);
+            // Conector.buttlight("red");
+        }
+		private function testVideo():void {
+			 var tV:VideoWindow = new VideoWindow();
+		 
+		 this.addChild(tV);
+		 tV.testCam();
+		 		 						
+		}
+		
+		
+		
+		private function testLoop():void {
+			
+			 if(1==2) {
+			 var tV2:VideoWindow = new VideoWindow();
+		      this.addChild(tV2);
+		
+       
+              var camera:Camera = Camera.getCamera();
+         
+                zimPublish.attachCamera(camera);
+               //  zimPublish.attachAudio(microphone);
+                zimPublish.publish("zim");
+                
+           ///    zimPlay = new NetStream(Conector.connection);
+		        zimPlay.play("zim");
+		        
+		       videoS = new Video(180, 120);
+		        videoS.attachNetStream(zimPlay);
+		       tV2.vid1.video = videoS;
+      	
+			 } else {
+			 	trace ("conecta");
+			 }
+						
+		}
+		
+		
+		public function goBase():void {
+			
+		}
+		public function start():void {
+				var test:Array = new Array("video","rock");
+				
+				onlineTree.setItemIcon("zim",imsMsn,imsAim);
+				
+			//	 application.addEventListener(KeyboardEvent.KEY_DOWN, trapKeys);
+			//	Conector.connection.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+          //		Conector.connection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+				//tobs.dataProvider = test;
+		}
+
+		
+	]]>
+</mx:Script>
+
+	
+	<mx:XMLList id="treeData">
+        <node>
+        <node label="aol">
+        <node label="paul" />
+                
+          
+            <node label="mark" />
+            <node label="tom" />
+       
+           </node>
+        <node label="zim">
+        	   <node label="nofx">
+                <node label="im working on zim"/>
+                <node label="i'm streaming _songname_"/>
+                <node label="selling radeon 9800xt"/>
+            </node>
+            <node  label="pateta">
+                <node label="i'm in sao paulo today"/>
+                <node label="news? news?"/>
+            </node>
+             <node label="andy">
+                <node label="i love blues"/>
+               </node>
+             <node label="mary">
+                <node label="did you saw that movie?"/>
+                <node label="i'm shocked!"/>
+            </node>
+        </node>    
+    </node>
+    </mx:XMLList>
+
+	<mx:Panel id="list" width="226" layout="absolute" title="Online" right="10" top="10" bottom="10" styleName="glass" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+	<mx:ControlBar bottom="-91" right="-21" top="510" left="1">
+		<mx:ComboBox width="100%" height="36"></mx:ComboBox>
+	</mx:ControlBar>
+	<mx:VDividedBox liveDragging="false" verticalGap="0" verticalAlign="bottom" left="0" right="0" top="0" bottom="0" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<mx:Tree id="onlineTree" dataProvider="{treeData}" showRoot="false" labelField="@label" height="100%"   width="100%">
+		
+		</mx:Tree>
+	</mx:VDividedBox>
+	</mx:Panel>
+	<componentes:ChatWindow  id="ChatWindow" styleName="glass" left="10" top="9" bottom="10" right="244">
+	</componentes:ChatWindow>
+	<componentes:VideoWindow x="146" y="57" width="207" height="197">
+	</componentes:VideoWindow>
+	
+
+</mx:Application>

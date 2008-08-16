@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:DrawingPad="comps.src.pad.controls.*"       layout="absolute" width="400" height="300"
+	creationComplete="initApp()">
+	
+	<mx:Script>
+		<![CDATA[
+			private function initApp():void {
+				
+				
+			}
+			
+			
+		]]>
+	</mx:Script>
+	
+		
+	
+		<DrawingPad:DrawingPad right="0" left="0" top="0" bottom="0" id="dpad"  />
+	
+		<mx:ControlBar>
+			
+			<mx:Button label="Clear" click="dpad.clearDrawing()" />
+			<mx:Button label="Save" click="dpad.saveDrawing()" />
+			<mx:Button label="Load" click="dpad.loadDrawing()" />
+			<mx:Button label="Load &amp; Animate" click="dpad.loadDrawingAndDrawIt()" />
+			<mx:ColorPicker id="drawColor" change="dpad.changeColor(drawColor.selectedColor)"/>
+			
+		</mx:ControlBar>
+</mx:Panel>

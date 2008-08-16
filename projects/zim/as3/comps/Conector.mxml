@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"  
+	creationComplete="buttlight('gray');" 
+	layout="absolute" width="345" height="127"
+	 verticalScrollPolicy="off" title="Connect" horizontalScrollPolicy="off">
+	<mx:states>
+		<mx:State  id="adstate" name="advan">
+			<mx:SetProperty name="height" value="264"/>
+			<mx:SetProperty target="{button1}" name="y" value="197"/>
+			<mx:SetEventHandler target="{button1}" name="click" handler="currentState=&quot;&quot;"/>
+			<mx:SetProperty target="{button1}" name="label" value="-"/>
+			<mx:SetProperty target="{urtxt}" name="y" value="48"/>
+			<mx:SetProperty target="{con_debug}" name="visible" value="true"/>
+			<mx:SetProperty target="{con_debug}" name="y" value="78"/>
+			<mx:SetProperty target="{con_debug}" name="height" value="111"/>
+			<mx:SetProperty target="{button1}" name="x" value="340"/>
+			<mx:SetProperty target="{con_debug}" name="width" value="348"/>
+			
+		
+			
+		</mx:State>
+		<mx:State name="connected">
+			<mx:SetProperty name="title"/>
+			<mx:SetStyle name="headerHeight" value="5"/>
+			<mx:RemoveChild target="{button1}"/>
+			<mx:SetProperty name="height" value="52"/>
+			<mx:SetProperty target="{mbt}" name="label"/>
+			<mx:SetProperty target="{mbt}" name="width" value="39"/>
+			<mx:SetProperty target="{mbt}" name="x" value="199"/>
+			<mx:SetProperty target="{mbt}" name="y" value="8"/>
+			<mx:SetProperty target="{nickName}" name="x" value="44"/>
+			<mx:SetProperty target="{nickName}" name="y" value="8"/>
+			<mx:SetProperty target="{nickName}" name="width" value="147"/>
+			<mx:SetProperty target="{nikColor}" name="y" value="9"/>
+			<mx:SetProperty name="width" value="266"/>
+		
+			
+		</mx:State>
+	
+	</mx:states>
+<mx:Script>
+	<![CDATA[
+		import mx.core.UIComponent;
+		import mx.core.Application;
+		import mx.validators.ValidationResult;
+		import mx.states.State;
+		import mx.collections.ArrayCollection;
+		import flash.net.NetStream;
+		import mx.core.BitmapAsset;
+		import flash.net.ObjectEncoding;
+	 	import comps.classes.zim.RedConector;
+	
+	    /*_________________________________________________________________
+        *
+		*       
+        *                                                          Objects
+  		*__________________________________________________________________
+  		*/
+  		
+		private var myUrl:String = "rtmp://localhost/zim";
+		private var chatUsers:Array = new Array();
+		 
+		private var myID:Number;
+		
+		public var testeURL:Array = new Array(myUrl,"re3");
+		public var soChat:SharedObject;
+             		    
+        [Bindable]
+        private var nc:RedConector = new RedConector();;
+        [Bindable]
+        public var dpUsers:ArrayCollection;
+        
+        /*_________________________________________________________________
+        *
+		*       
+        *                                                          images
+  		*__________________________________________________________________
+  		*/
+  		
+		[Embed(source="../images/dot.png")]
+        [Bindable]
+        public var imgCls:Class;
+        [Embed(source="../images/doty.png")]
+        [Bindable]
+        public var imgCls1:Class;
+        [Embed(source="../images/dotr.png")]
+        [Bindable]
+        public var imgCls2:Class;
+        [Embed(source="../images/dotg.png")]
+        [Bindable]
+        public var imgCls3:Class;
+            
+		/*_________________________________________________________________
+        *
+		*       
+        *                                                          Connect
+  		*__________________________________________________________________
+  		*/
+		
+    	public function Connect():void{
+    		
+    		trace (nc.connected);
+			if (nc.connected) {
+				soChat.close();
+                nc.close();
+				buttlight("gray");
+			}else{
+				mbt.enabled = false;
+				if (currentState=="advan"){
+					myUrl = urtxt.text;
+				} else {
+				    myUrl = testeURL[0];
+				}
+			
+				buttlight("yellow");
+				//nc = new RedConector();
+                // works with nc.connect( "rtmp://localhost/SOSample" ); also
+                // nc.connect( "rtmp://localhost/fitcDemo" );         
+    			nc.connect(myUrl, nickName.text);
+    		//	nc.addEventListener( "success", connectionSuccessHandler );
+    			nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+      			nc.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+		 	}
+    
+		}
+		
+		
+		/*_________________________________________________________________
+        *
+		*       
+        *                                                          Handlers
+  		*__________________________________________________________________
+  		*/
+			
+		private function netStatusHandler(event:NetStatusEvent):void {
+			
+     		   switch (event.info.code) {
+     		   	
+         			   case "NetConnection.Connect.Success":
+          			     // connectStream();
+            			UIComponent(parent).currentState = "draw";
+            		
+            			    buttlight("green");
+            			    mbt.enabled = true;
+             			   	debugShow("OK");
+             			   	var tes:String = new String();
+             			   	tes = UIComponent(parent).getStyle("backgroundColor");
+             			    
+             			  
+             			      myID = nc.myID;
+            
+          					  // Make SO and other Connection calls
+           					 connectToChat();
+             			    
+             							  //   startChat();
+             			   break;
+             			   
+             			case "NetConnection.Connect.Closed":
+             				buttlight("gray");
+             				mbt.enabled = true;
+             				debugShow("Desconectado");
+             				break;
+                
+             			default :
+          				   	trace(event.info.code);
+           				   	debugShow("Problema :" + event.info.code);
+           					buttlight("red");
+           					mbt.enabled = true;
+            				break;
+        		}
+   		 }
+    	private function securityErrorHandler(event:SecurityErrorEvent):void {
+         	trace("securityErrorHandler: " + event);
+         	debugShow("problema: "+ event);
+         	buttlight("red");
+    	}
+		public function expand():void{
+    		 currentState="advan";
+    		 urtxt.dataProvider = testeURL;
+    	}
+	  
+        
+         private function connectToChat():void
+        {
+            soChat = SharedObject.getRemote( "videoConferenceChat", nc.uri, true );
+            soChat.addEventListener( NetStatusEvent.NET_STATUS, netStatusHandler );
+            soChat.addEventListener( AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler );
+            soChat.addEventListener( SyncEvent.SYNC, sharedObjectSyncHandler );
+            soChat.client = this;
+            soChat.connect( nc );
+            
+            // Get the names for all the connected users
+            soChat.send( "getName" );
+        }
+        
+        /*_________________________________________________________________
+        *
+		*       
+        *                                                         nickstuff
+  		*__________________________________________________________________
+  		*/
+  		
+         public function getName():void{
+         	
+			trace( "getName: " + nickName.text );
+            // Clear out User array
+            chatUsers = new Array();
+            // Getting Users name is basically forcing each connect user to re-send their name
+          soChat.send( "newName", nickName.text, myID );
+           
+        }           
+        
+        public function newName( name:String, chatID:Number ):void {
+        	
+			trace( "newName: name: " + name + " chatID: " + chatID );
+         
+            
+            // Only add new users to array
+           // var isNew:Boolean = true;
+          //  for( var i:int = 0; i < chatUsers.length;i++ ) {
+          //  	trace (chatUsers[i].toString());
+          //      if( chatUsers[ i ] != ""  ) {
+           //         isNew = false;
+          //      }
+           // }
+          //  if( isNew )   
+            
+            chatUsers[chatID] = name;
+            
+            // Sort Users
+         //   chatUsers.sortOn( Array.CASEINSENSITIVE );
+            
+            dpUsers = new ArrayCollection( chatUsers );    
+        } 
+        
+        public function removeName ( chatID : Number) :void {
+        	
+        	chatUsers.splice(chatID ,1);
+        	
+        	
+        	
+        }
+        
+        /*_________________________________________________________________
+        *
+		*       
+        *                                                            SO
+  		*__________________________________________________________________
+  		*/
+        
+        
+        private function sharedObjectSyncHandler( event:SyncEvent ):void{
+    
+  		  trace( "sharedObjectSyncHandler:code: " + event.changeList );
+		}
+
+ 		 private function asyncErrorHandler( event:AsyncErrorEvent ):void{
+ 		   trace( "asyncErrorHandler:code: " + event.error );
+		}      
+	
+	
+
+		/*_________________________________________________________________
+        *
+		*       
+        *                                                        streams
+  		*__________________________________________________________________
+  		*/
+	
+		public function startCam():void {
+				trace ("rocx");
+			
+		}
+	
+	
+		public function connectStream():void {
+      		  var stream:NetStream = new NetStream(nc);
+     		   var video:Video = new Video();
+     
+ 				 //          video.attachNetStream(stream);
+  				  //        stream.play(videoUrl);
+				   //         addChild(video);
+  		  }
+	
+				
+		/*_________________________________________________________________
+        *
+		*       
+        *                                                         UI control
+  		*__________________________________________________________________
+  		*/
+	          
+            
+		public function buttlight(what:String):void {
+						
+			// var imgObj:BitmapAsset = new imgCls() as BitmapAsset;
+			switch(what) {
+				case "gray":
+				mbt.setStyle("icon",imgCls);
+				urtxt.enabled = true;
+		
+				//var imgObj:BitmapAsset = new imgCls() as BitmapAsset;
+				break;
+				case "yellow":
+				mbt.setStyle("icon",imgCls1);
+				urtxt.enabled = false;
+				break;
+				case "red":
+				mbt.setStyle("icon",imgCls2);
+				urtxt.enabled = true;
+				break;
+				case "green":
+				mbt.setStyle("icon",imgCls3);
+				
+				
+				break;
+				
+			}
+					
+		}
+		
+		private function corNick():void {
+		 		nickName.setStyle("color", nikColor.selectedColor);
+		 		
+		 }
+		 
+		 public function debugShow(what:String):void {
+					con_debug.text += what + " ... \n";
+		 }		
+		 public function clearDebug():void{
+		 			con_debug.text ="";
+		 }
+		 
+		 private function nickFocus():void {
+		 	
+		 	if (nickName.text == "Your nickname") nickName.text = "";
+		 	else if (nickName.text == "") nickName.text = "Your nickname";
+		 	
+		 		 	
+		 	
+		 }
+	
+	]]>
+</mx:Script>
+				
+								<mx:TextInput id="nickName" text="Your nickname" focusIn="nickFocus();" focusOut="nickFocus();" width="270" left="10" top="10"/>
+								<mx:Button id="mbt" toolTip="Conecte" click="Connect();"  label="Go"    height="28" right="10" bottom="0"/>
+								<mx:ColorPicker change="corNick();" id="nikColor" height="25" width="25" right="10" top="9"/>
+								<mx:Button x="10" y="53" width="23.5" height="20" id="button1" click="expand()"/>
+								<mx:ComboBox  id="urtxt" x="10" y="72" width="348" editable="true" visible="false"  ></mx:ComboBox>
+								<mx:TextArea x="10" y="47" width="328" height="17" editable="false" visible="false" id="con_debug"/>
+				
+			
+</mx:Panel>

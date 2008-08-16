@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	 alpha="1" creationComplete="start();" currentState="login" styleName="Application"
+	 xmlns:componentes="comps.*" themeColor="haloSilver" backgroundColor="#FFFFFF"
+	 >
+	 
+	 <mx:states>
+	 	 <mx:State name="login">
+	 	 	 <mx:RemoveChild target="{list}"/>
+	 	 
+	 	 	 <mx:SetProperty target="{Conector}" name="x"/>
+	 	 	 <mx:SetProperty target="{Conector}" name="y"/>
+	 	 	 <mx:SetProperty target="{Conector}" name="currentState"/>
+	 	 	 <mx:SetProperty target="{Conector}" name="layout" value="absolute"/>
+	 	 
+	 	 	 <mx:SetProperty target="{Conector}" name="height" value="165"/>
+	 	 	 	 <mx:RemoveChild target="{panel1}"/>
+	 	 	 	 <mx:RemoveChild target="{image2}"/>
+	 	 	 	 <mx:RemoveChild target="{panel3}"/>
+	 	 	 	 <mx:RemoveChild target="{image1}"/>
+	 	 	 	 <mx:RemoveChild target="{hslider1}"/>
+	 	 	 	 <mx:RemoveChild target="{panel4}"/>
+	 	 	 	 <mx:SetProperty target="{myConector}" name="y"/>
+	 	 	 	
+	 	 	 	 <mx:SetProperty target="{myConector}" name="currentState"/>
+	 	 	 	
+	 	 	 	 <mx:RemoveChild target="{myChat}"/>
+	 	 	 	 <mx:SetStyle target="{myConector}" name="right" value="75"/>
+	 	 	 	 <mx:SetStyle target="{myConector}" name="verticalCenter" value="0"/>
+	 	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 	 	 <mx:Text x="17" text="Welcome, you have been invited by ... to join him for some interactivity! Type you nick and let's go!" width="213" height="127" verticalCenter="0"/>
+	 	 	 	 </mx:AddChild>
+	 	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 	 	 <mx:Label text="Zim_client_AS3 beta - www.osflash.org/Zim" right="10" bottom="10" styleName="footer"/>
+	 	 	 	 </mx:AddChild>
+	 	 		 	 	
+	 	 	
+	 	 
+	 	 </mx:State>
+	 	 <mx:State name="draw">
+	 	 	 <mx:SetStyle target="{myChat}" name="right" value="226"/>
+	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 <componentes:DrawPad left="401" right="10" top="84" bottom="65">
+	 	 	 	 </componentes:DrawPad>
+	 	 	 </mx:AddChild>
+	 	 	 <mx:SetStyle target="{panel3}" name="right" value="211"/>
+	 	 	 <mx:SetStyle target="{myConector}" name="right" value="331"/>
+	 	 	 <mx:SetStyle target="{panel4}" name="right" value="93"/>
+	 	 	 <mx:AddChild position="lastChild">
+	 	 	 	 <componentes:Settings currentState="collapsed" styleName="colorControlBar" right="10" top="15">
+	 	 	 	 </componentes:Settings>
+	 	 	 </mx:AddChild>
+	 	 	 <mx:SetProperty target="{myConector}" name="styleName" value="colorControlBar"/>
+	 	 </mx:State>
+	 </mx:states>
+	 
+	 <mx:Style source="css/plateau.css"/>
+	 
+	 
+<mx:Script>
+	<![CDATA[
+		
+	//	import comps.VideoWindow;
+		import mx.controls.Text;
+        import comps.classes.zim.RedConector;
+        import mx.controls.Alert;
+        import flash.net.SharedObject;
+            
+         
+	
+		/*_________________________________________________________________
+        *
+		*       
+        *                                                         Objects
+  		*__________________________________________________________________
+  		*/
+	//	public var chatSO:SharedObject;
+	//	public var soName:String = new String("zimSO");
+	//	public var history:Array= new Array();
+
+	    private var zimPublish:NetStream;
+        private var videoS:Video; 
+	    private var zimPlay:NetStream;
+	 //   private var myID:Number;
+	    
+	    [Bindable]
+        private var btnText:String = "Login";
+        
+        [Bindable]
+	    public var myFilters:Array = new Array();
+	   
+	   
+	   /*_________________________________________________________________
+        *
+		*       
+        *                                                         UI control
+  		*__________________________________________________________________
+  		*/
+	    private function start():void {
+			
+				GlowFilterSet();
+				 application.addEventListener(KeyboardEvent.KEY_DOWN, trapKeys);
+				
+			
+		}
+		private function trapKeys(e:KeyboardEvent):void {
+		//		if(e.keyCode  == Keyboard.ENTER && ChatWindow.enterText.length > 0)
+	     //		{
+					
+			//			var msg = message.text;
+				//		msg = getUserName() + msg;
+					//	so.setData(chatID, msg);
+					//chatSO.(ChatWindow.enterText.text);
+					
+			//		ChatWindow.enterText.text = "";
+		  	//	 }
+		  			
+   				// ta1.text = String(e.charCode) + "/" + String(e.keyCode);
+		}
+
+	              
+		// the glow effect of the panels
+		private function getBitmapFilter():BitmapFilter {
+            var color:Number = 0x000000;
+            var alpha:Number = .3;
+            var blurX:Number = 12;
+            var blurY:Number = 12;
+            var strength:Number = .5;
+            var inner:Boolean = false;
+            var knockout:Boolean = false;
+            var quality:Number = BitmapFilterQuality.HIGH;
+
+            return new GlowFilter(color,
+                                  alpha,
+                                  blurX,
+                                  blurY,
+                                  strength,
+                                  quality,
+                                  inner,
+                                  knockout);
+        }
+        
+        // apply effect to every panel
+		public function GlowFilterSet():void {
+            var filter:BitmapFilter = getBitmapFilter();
+            myFilters.push(filter);
+            //panels:
+            myConector.filters = myFilters;
+        }
+
+	    /*_________________________________________________________________
+        *
+		*       
+        *                                                        Functions
+  		*__________________________________________________________________
+  		*/
+	   
+	//TODO: this should go to the message window component
+	
+	
+	    public function sendMessage( msg:String ):void
+            {
+                myConector.soChat.send( "newMessage",  
+                    "<font color=\"#" + myConector.nikColor.selectedColor.toString(16) + "\"><b>" + myConector.nickName.text + "</b></font> - " + msg );
+
+                myChat.txtMsg.htmlText = "";
+            }
+
+            public function newMessage( msg:String ):void
+            {
+				trace( "newMessage: " + msg );                
+               myChat.txtChatBox.htmlText += msg + "\n";
+                
+            }
+            /*
+ 		private function sendMessage():void {
+			 if(Conector.connection.connected) {
+				var sendStr:String = enterText.text;
+		 		Conector.dconnection.call("test", responder, sendStr);
+			Conector.connection.call("add", responder, 3,6);
+			 } else {
+		 		trace ("not connected");
+			 }
+			
+		}
+
+		
+		public function startChat():void {
+			
+			chatSO = SharedObject.getRemote(soName, Conector.connection.uri, false);
+			chatSO.connect(Conector.connection);
+			chatSO.addEventListener(SyncEvent.SYNC, chatSync);
+		}
+		private function chatSync(event:SyncEvent):void {
+			
+		    history.push(event.toString());
+			ChatWindow.mostraChat.text = history.join("\n");
+			trace (event.toString());
+			trace (chatSO.data());
+		}
+		*/
+		
+		
+	//TODO: Video component
+		/*
+		private function testVideo():void {
+			 var tV:VideoWindow = new VideoWindow();
+		 
+		 this.addChild(tV);
+		 tV.testCam();
+		 		 						
+		}
+		
+		
+		
+		private function testLoop():void {
+			
+			 if(Conector.connection.connected) {
+			 var tV2:VideoWindow = new VideoWindow();
+		      this.addChild(tV2);
+		
+       
+              var camera:Camera = Camera.getCamera();
+         
+                zimPublish.attachCamera(camera);
+               //  zimPublish.attachAudio(microphone);
+                zimPublish.publish("zim");
+                
+               zimPlay = new NetStream(Conector.connection);
+		        zimPlay.play("zim");
+		        
+		       videoS = new Video(180, 120);
+		        videoS.attachNetStream(zimPlay);
+		       tV2.vid1.video = videoS;
+      	
+			 } else {
+			 	trace ("conecta");
+			 }
+						
+		}
+		
+	
+		*/
+	            
+    private function netStatusHandler( event:NetStatusEvent ):void
+    {
+        trace( "netStatusHandler:code: " + event.info.code );
+    }
+        
+        ]]>
+    </mx:Script>
+
+
+	<mx:Panel id="list" layout="absolute" title="Online" top="84" bottom="10" styleName="zim" left="10" width="130">
+		<mx:Tree top="0" bottom="0" left="0" right="0"></mx:Tree>
+		<mx:Label text="Chat Users:" />
+		
+		<mx:DataGrid
+			id="lstUsers"
+			dataProvider="{ myConector.dpUsers }"
+			width="100%"
+			height="100%"
+			/>
+		
+</mx:Panel>
+	<mx:Image x="17" y="22" source="images/zimb.png"/>
+	<mx:Panel y="15" width="112" height="51" layout="absolute" styleName="zim" headerHeight="2" right="128" id="panel3">
+		<mx:Image x="6" y="8" source="images/cam.png" id="image2"/>
+		<mx:Image x="55" y="9" source="images/mic.png"/>
+	</mx:Panel>
+	<mx:Panel y="15" width="110" height="51" layout="absolute" styleName="colorControlBar" headerHeight="2" shadowDistance="0" right="10" borderThickness="1" id="panel4">
+		<mx:Image x="0" y="8" source="images/som.png" id="image1"/>
+		<mx:HSlider x="22" y="10" width="64" id="hslider1" minimum="0" maximum="100" allowTrackClick="true"/>
+	</mx:Panel>
+	<mx:Panel width="112" height="47" filters="{myFilters}" layout="absolute" styleName="zim" headerHeight="2" right="10" id="panel1" bottom="10">
+		<mx:Image x="8" y="4" source="images/load.png"/>
+		<mx:Image x="56" y="4" source="images/load.png"/>
+	</mx:Panel>
+	<componentes:Conector id="myConector" y="14" currentState="connected" right="248">
+	</componentes:Conector>
+	<componentes:ChatWindow id="myChat" styleName="zim" left="148" right="10" top="84" bottom="65">
+	</componentes:ChatWindow>
+	
+</mx:Application>

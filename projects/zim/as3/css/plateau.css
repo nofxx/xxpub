@@ -1,0 +1,109 @@
+/*
+///////////////////////////////////////////////////////////////////////////////
+//
+// 
+// 
+//  
+// 
+//
+
+P
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+*/
+
+/* Style for color-specific state - Orange = Personal Store */
+
+Application
+{
+   backgroundColor:		#EAE6DD; 
+    fillColors: #DEDEDE, #EFEFEF;
+    font-family:  Verdana, Arial;
+    font-size: 14px;
+}
+  
+/*
+	need to be able to declare and control the background image here.
+
+	backgroundImage:		url('beige_background.jpg');
+	backgroundSize:			100; 
+}
+Panel, TitleWindow {*/
+Panel
+{	
+	highlightAlphas: 1, 0;
+	backgroundColor:  #FFFFFF;
+	
+	borderStyle: solid;
+	borderThickness: 1px;
+	
+	dropShadowEnabled:  false;
+}
+
+Canvas {
+	backgroundColor:  #FFFFFF;
+	fillAlphas: 			60, 60, 75, 65;
+}
+.zim {
+	borderColor:			#FFFFFF;
+	fillAlphas: 			60, 60, 75, 65;
+	fillColors: 			#F5F5F5, #F3F3F3, #DDDDDD, #FFFFFF;
+	highlightAlphas:		5, 25;
+	backgroundAlpha:		1;
+   filters:     myFilters;
+	
+}
+
+.footer {
+	color: #555555;
+	font-size: 10px;
+}
+
+.global {
+	borderColor:			#767473;
+	fillAlphas: 			60, 60, 75, 65;
+	fillColors: 			#888888, #F3F3F3, #DDDDDD, #FFFFFF;
+	highlightAlphas:		5, 25;
+	backgroundAlpha:		0.4;
+	}
+
+
+.colorPanel {		/* for the background find/cart surface */
+	borderStyle: "none";
+	borderThickness: 0;
+	backgroundColor:		#BCB29F;
+	backgroundAlpha:		0.4;
+	color: 					#170505;
+}
+
+
+
+
+
+.colorControlBar {	/* for the applicationControlBar */
+	fillAlphas: 			.60, .40;
+	cornerRadius: 			6;
+	borderColor:			#B4C800;
+	fillAlphas: 			60, 60, 75, 65;
+	fillColors: 			#F5F5F5, #F3F3F3, #DDDDDD, #FFFFFF;
+	highlightAlphas:		5, 25;
+	backgroundAlpha:		1;
+   filters:     myFilters;
+}
+
+.guidingButton {	/* the very friendly button which shows the way */
+	borderColor:			#D77D01;
+	fillAlphas: 			1.00, 1.00;
+	fillColors: 			#DA8613, #EEAB5A, #EEAB5A, #FAD78A;
+	highlightAlphas:		.07, .45;
+}
+.windowStatus {
+	color: #121212;
+}
+
+.windowStyles {		/* foreground panel's title text */
+	color: #121212;
+}
+/* CSS file */
