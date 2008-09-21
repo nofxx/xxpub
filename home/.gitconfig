@@ -1,0 +1,18 @@
+[user]
+  name = Marcos Augusto
+  email = x@nofxx.com
+[i18n]
+   commitencoding = UTF8
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+[merge]
+  tool = opendiff
+  summary = true
