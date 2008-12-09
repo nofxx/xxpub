@@ -8,6 +8,8 @@
   ci = commit
   co = checkout
   br = branch
+  bs = bisect
+  cp = cherry-pick
 [color]
   diff = auto
   status = auto

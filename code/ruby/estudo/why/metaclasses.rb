@@ -9,6 +9,10 @@ class Jogador
   def initialize(nome, pontos) 
     @nome, @pontos = nome, pontos # => ["Heber Santelo", 14000], ["bda", 5], ["rrra", 15], ["Sapao", 2000]
   end
+  
+  def method_missing( id, *args)
+    puts "#{id} --- #{args.inspect}"
+  end
 end
 
 
@@ -40,3 +44,5 @@ novo.nasc # => 1980
 
 # >> #<Jogador:0x22a4c @pontos=14000, @nome="Heber Santelo">
 # >> Jogador
+
+brol.fock :a, :b 
