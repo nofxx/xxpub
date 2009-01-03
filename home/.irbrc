@@ -1,12 +1,22 @@
 # -*- mode: ruby; -*-
-
 %w{irb/completion irb/ext/save-history pp rubygems}.map(&method(:require))
 begin
   require 'what_methods'
 rescue LoadError; end
 
+begin
+  require "wirble"
+  Wirble.init(:skip_prompt=>true,:skip_history=>true)
+  Wirble.colorize
+rescue LoadError => e
+  puts "Seems you don't have Wirble installed: #{e}"
+end
+
+#Wirble.init
+#Wirble.colorize
+
 IRB.conf[:AUTO_INDENT] = true
-IRB.conf[:SAVE_HISTORY] = 300
+IRB.conf[:SAVE_HISTORY] = 2000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb.history"
 
 if IRB.conf[:PROMPT]
@@ -24,6 +34,12 @@ class Object
   def local_methods(obj = self)
     (obj.methods - (obj.class.superclass || Object).instance_methods).sort
   end
+end
+
+# Log to STDOUT if in Rails
+if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
+  require 'logger'
+  RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
 end
 
 # Called after the irb session is initialized and Rails has
@@ -44,7 +60,26 @@ RUBY
       end
     rescue
     end
-
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 end
+
+# configure vim
+@irb_temp_code = nil
+ 
+def vim(file=nil)
+  file = file.to_s if file
+  file = file || @irb_temp_code || Tempfile.new("irb_tempfile").path+".rb"
+  system("vim #{file}")
+  if(File.exists?(file) && File.size(file)>0)
+    Object.class_eval(File.read(file))
+    @irb_temp_code = file
+    "File loaded from Vim."
+  else
+    "No file loaded."
+  end
+rescue => e
+  puts "Error on vim: #{e}"
+end
+puts "Vim available."
+#
