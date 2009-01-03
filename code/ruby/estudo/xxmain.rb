@@ -82,6 +82,39 @@ end
 Profiler__::stop_profile
 
 
+# # # # # # 
+#
+#                                                            PRINT NATIVES
+#                                                
+# 
+
+x = 2.8392
+y = 0742
+z = 0x78247
+
+printf("Decimal %d , Octal 0%o \n", z, y)
+printf("Float %0.02f , Hexa 0x%x \n", x , z)
+printf("Inspect %p , String %s \n", z, y)
+
+
+# # # # # # 
+#
+#                                                            METHODS
+#                                                
+#
+
+def five(a, b, c, d, e) 
+"I was passed #{a} #{b} #{c} #{d} #{e}" 
+end 
+p five(1, 2, 3, 4, 5 )        #→ "I was passed 1 2 3 4 5" 
+p five(1, 2, 3, *['a', 'b'])  #→ "I was passed 1 2 3 a b" 
+p five(*(10..14).to_a)        #→ "I was passed 10 11 12 13 14" 
+
+
+
+#Xout.x()
+
+
 
 # # # # # # 
 #
@@ -118,6 +151,18 @@ def repetidor(r)
 end
 
 repetidor(3) { puts "oi" }
+
+def fib_up_to(max) 
+  i1, i2 = 1, 1 # parallel assignment (i1 = 1 and i2 = 1) 
+  while i1 <= max 
+    yield i1 
+    i1, i2 = i2, i1+i2 
+  end 
+end 
+fib_up_to(2000) {|f| print f, " " } 
+
+
+1.step(100,12) { |i| puts i }
 
 #Xout.x()
 
@@ -180,7 +225,7 @@ end
 le, creve = box
 
 
-Xout.x(le.call, creve.call(2), le.call)
+#Xout.x(le.call, creve.call(2), le.call)
 
 
 # # # # # # 
@@ -484,7 +529,7 @@ class LoteriaDraw
     @@tickets[c] += tickets
   end
 end
-class << LoteriaDraw
+class << LoteriaDraw 
   def play
     final = Loteria.new_random
     winners = {}
@@ -514,15 +559,122 @@ sorteio = Loteria.new(1,2,3)
 puts tick.score(sorteio)
 
 # LoteriaDraw.play.each do |w, t|
-  # puts w + "ganhou" + t.length + "ticks"
+#   puts w + "ganhou" + t.length + "ticks"
 # end
 
+# # # # # # 
+#
+#                                                         ACCESS CONTROL
+#                                                
+# 
+puts "boteco \n\n"
+
+class Boteco
+  def banheirao;    puts "stinks";  end
+  
+  def go_banheiro
+    banheiro
+  end
+
+  def go_suite
+    suite
+  end
+  
+  protected
+  def banheiro;    puts "someone farted here";  end
+  
+  private
+  def suite;    puts "soh meu";  end
+  
+end
+
+bar = Boteco.new
+bar.banheirao
+#bar.banheiro # PROTECTED
+bar.go_banheiro
+#bar.suite # PRIVATE
+bar.go_suite
+
+class Protector
+  def initialize
+    @secret_data = 5
+  end
+  def ==( other )
+    secret_data == other.secret_data
+  end
+  protected
+  attr_reader :secret_data
+end
+
+# # # # # # 
+#
+#                                                         OPERATORs
+#                                                
+# 
+# Enumerable , [] 
+
+class VU 
+  include Comparable 
+  attr :volume 
+  def initialize(volume) # 0..9 
+    @volume = volume 
+  end 
+  def inspect 
+    '#' * @volume 
+  end 
+  # Support for ranges 
+  def <=>(other) 
+    self.volume <=> other.volume 
+  end 
+  def succ 
+    raise(IndexError, "Volume too big") if @volume >= 9 
+    VU.new(@volume.succ) 
+  end 
+  def self.[](from_vu, to_vu)
+    VU.new(from_vu)..VU.new(to_vu)
+  end
+end 
+
+medium_volume = VU.new(4)..VU.new(7) 
+medium_volume.to_a.each { |v| puts v.volume }
+vuu = VU.new(3)
+puts medium_volume.include?(VU.new(3))
+puts vuu.succ.volume
+max_volume = VU[2,3]
+p max_volume
+
+
+# # # # # # 
+#
+#                                                         MIXINS
+#                                                
+# 
+
+module Summable
+  def sum
+    inject {|v,n| v+n}
+  end
+end
+
+class Array
+  include Summable
+end
+class Range
+  include Summable
+end
+
+p %w{3 45 64 254}.sum
+p (1..20).sum
+p ('a'..'m').sum
+
+
+Xout.x()
 # # # # # # 
 #
 #                                                         SINGLETON
 #                                                
 # 
-# => Método dado só a um objeto... instancia?
+# => Método dado só a um objeto... instancia
 
 class SingletonTest
   def size
@@ -783,6 +935,13 @@ def hexa(s)
 end
 
 hexa("f<0xsfs<0x44>")
+
+
+re = /(\d+):(\d+)/ # match a time hh:mm 
+md1 = re.match("Time: 12:34am") 
+md2 = re.match("Time: 10:30pm") 
+p md1[1, 2]# → ["12", "34"] 
+p md2[1, 2]# → ["10", "30"] 
 
 #Xout.x()
 

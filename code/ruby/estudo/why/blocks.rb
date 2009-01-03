@@ -1,12 +1,9 @@
-#/usr/bin/env ruby
+#!/usr/bin/env ruby
 #
 #
-
-
-
 
 broco = lambda{ |x| p x }
-broco.call("Sapao")
+broco.call("rock and roll")
 
 broco = lambda{ |x,y| x - y + x }
 p broco.call(3,2)
@@ -17,19 +14,17 @@ p procnovo.call(20,67,67,98)
 
 def chama
   p "1"
-  yield
+  yield(2)
   p "2"
-  yield
+  yield(1)
 end
-chama { puts "oi" }
+chama { |x| puts "oi #{x}" }
 
+puts '-=-=-=-=-==-=-=-==-=-=-=-=-=-=-=-=-=-=-='
 
 def mchama(n) #, &broc)
-  if block_given?
-    n.times { yield }
-  else
-    raise ArgumentError.new("Voce nao mandou um broco")
-  end
+  raise ArgumentError.new("Voce nao mandou um broco") unless block_given?
+  n.times { yield }
 end
 mchama(5) { p "oieee" }
 
@@ -73,3 +68,8 @@ calc = lambda{ |x| p "rox #{x}"}
 end
 
 8.times { |x| p x+10 }
+
+
+def caluer(&block)
+  raise unless block_given?
+  

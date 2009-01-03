@@ -1,3 +1,28 @@
+#http://github.com/caffo/dotfiles/tree/master/screenrc
+# Basic stuff
+nethack         on
+escape          ^t^t
+bell_msg        "Bell in window %n: %t"
+vbell           off
+autodetach      on
+startup_message off
+defscrollback   10240
+hardstatus      on
+hardstatus      alwayslastline "%{=u Wr}[%Y-%m-%d %02c%{-u Wr}] %{Wk}%-w%{BW}%n %t%{-}%+w"
+caption         splitonly "%{.BW} >> %n %t"
+msgwait         2
+ 
+termcapinfo     xterm 'Co@256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce          on
+term            xterm-256color
+ 
+# Key bind
+bind ^k
+bind ^\
+bind ^G
+bind \\ quit
+bind k kill
+bind / eval "scrollback 0" "scrollback 10240"
 
 vbell on
 vbell_msg   " *X* " 
