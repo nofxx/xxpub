@@ -4,7 +4,7 @@
 #   nofxx - 2009
 #
 if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+    . /etc/bashrc
 fi
 
 #
@@ -13,6 +13,11 @@ fi
 alias vi='vim'
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/home/nofxx/scripts"
 export EDITOR="vi"
+export HISTCONTROL=erasedups #rimuove i duplicati
+export HISTFILESIZE=1000000000
+export HISTSIZE=10000000        #size of history
+shopt -s histappend 
+alias countcommand='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
 
 #
 # PS1
@@ -220,5 +225,5 @@ translate ()
 }
 
 if [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
+    . /etc/bash_completion
 fi
