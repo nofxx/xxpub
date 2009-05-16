@@ -17,6 +17,7 @@ begin
 rescue LoadError => e
   puts "Install hirb!!: #{e}"
 end
+
 #
 # Prompt stuff
 #
@@ -141,4 +142,3 @@ end
 #
 HASH = { :one => 'Marley', :two => 'Barley', :three => 'Harley', :four => 'Farley'} unless defined?(HASH)
 ARRAY = HASH.keys unless defined?(ARRAY)
-
