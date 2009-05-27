@@ -16,7 +16,7 @@ export EDITOR="vi"
 export HISTCONTROL=erasedups #rimuove i duplicati
 export HISTFILESIZE=1000000000
 export HISTSIZE=10000000        #size of history
-shopt -s histappend 
+shopt -s histappend
 alias countcommand='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
 
 #
@@ -145,7 +145,7 @@ alias svnclean='rm -rf `find . -name .svn`'
 # RUBY
 #
 function cdgem {
-  cd /usr/local/lib/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
+  cd /usr/lib/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
 }
 
 export GEMDIR=`gem env gemdir`
@@ -165,9 +165,11 @@ complete -o default -o nospace -F _gemdocomplete gemdoc
 # RAILS
 #
 alias ss='script/server &' # start up the beast
-alias sc='script/console' # obvious
-alias sg='script/generate'
+alias sc='script/console'  # obvious
+alias sg='script/generate' # this on is free
 alias aa='autospec &'
+alias ca='cucumber -f pretty features&'
+alias aaa='AUTOFEATURE=true autospec &'
 alias sd='script/server mongrel --debugger'
 alias sb='script/dbconsole'
 alias mongs='mongrel_rails cluster::configure -e production -N 3 -c $(pwd) --user mongrel --group mongrel -p'
