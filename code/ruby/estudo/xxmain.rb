@@ -1,47 +1,48 @@
-
+# -*- coding: utf-8 -*-
+# RUBY 1.9 ^^^^^^^^
 #
 #  Created by nofxx on 2007-10-04.
 #  Copyright (c) 2007. All rights reserved.
-# 
+#
 #
 #                                                            RUBY x1
-#                                                
+#
 #
 =begin
 BEGIN Code, enclosed in { and }, to run before the program runs.
 END Code, enclosed in { and }, to run when the program ends.
 alias Creates an alias for an existing method, operator, or global variable.
-and Logical operator; same as && except and has lower precedence. 
+and Logical operator; same as && except and has lower precedence.
 (Compare with or.)
 begin Begins a code block or group of statements; closes with end.
 break Terminates a while or until loop or a method inside a block.
-\case Compares an expression with a matching when clause; closes with end. 
+\case Compares an expression with a matching when clause; closes with end.
 (See when.)
 class Defines a class; closes with end.
 def Defines a method; closes with end.
 defined? A special operator that determines if a variable, method, super
- method, 
+ method,
 or block exists.
 do Begins a block and executes code in that block; closes with end.
-else Executes following code if previous conditional, in if, elsif, unless, 
-  or when, 
+else Executes following code if previous conditional, in if, elsif, unless,
+  or when,
   is not true.
-elsif Executes following code if previous conditional, in if or elsif, 
+elsif Executes following code if previous conditional, in if or elsif,
   is not true.
-# end Ends a code block (group of statements) starting with begin, def, 
+# end Ends a code block (group of statements) starting with begin, def,
 do, if, etc.
 ensure Always executes at block termination; use after last rescue.
 false Logical or Boolean false, instance of FalseClass. (See true.)
 # for Begins a for loop; used with in.
-# if Executes code block if conditional statement is true. 
+# if Executes code block if conditional statement is true.
 Closes with end. (Compare with unless, until.)
 in Used with for loop. (See for.)
 module Defines a module; closes with end.
 next Jumps before a loop’s conditional. (Compare with redo.)
-nil Empty, uninitialized variable, or invalid, but not the same as zero; 
+nil Empty, uninitialized variable, or invalid, but not the same as zero;
 object of NilClass.
 not Logical operator; same as !.
-or Logical operator; same as || except or has lower precedence. 
+or Logical operator; same as || except or has lower precedence.
 (Compare with and.)
 redo Jumps after a loop’s conditional. (Compare with next.)
 rescue Evaluates an expression after an exception is raised; used before ensure.
@@ -49,15 +50,15 @@ retry Repeats a method call outside of rescue; jumps to top of blck INTERATOR
  (begin) if inside rescue.
 return Returns a value from a method or block. May be omitted.
 self Current object (invoked by a method).
-super Calls method of the same name in the superclass. 
-The superclass is the parent 
+super Calls method of the same name in the superclass.
+The superclass is the parent
 of this class.
 then A continuation for if, unless, and when. May be omitted.
 true Logical or Boolean true, instance of TrueClass. (See false.)
 undef Makes a method in current class undefined.
-# unless Executes code block if conditional statement is false. 
+# unless Executes code block if conditional statement is false.
 (Compare with if, until.)
-# until Executes code block while conditional statement is false. 
+# until Executes code block while conditional statement is false.
 (Compare with if, unless.)
 # when Starts a clause (one or more) under case.
 # while Executes code while the conditional statement is true.
@@ -82,11 +83,11 @@ end
 Profiler__::stop_profile
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            PRINT NATIVES
-#                                                
-# 
+#
+#
 
 x = 2.8392
 y = 0742
@@ -97,18 +98,18 @@ printf("Float %0.02f , Hexa 0x%x \n", x , z)
 printf("Inspect %p , String %s \n", z, y)
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            METHODS
-#                                                
+#
 #
 
-def five(a, b, c, d, e) 
-"I was passed #{a} #{b} #{c} #{d} #{e}" 
-end 
-p five(1, 2, 3, 4, 5 )        #→ "I was passed 1 2 3 4 5" 
-p five(1, 2, 3, *['a', 'b'])  #→ "I was passed 1 2 3 a b" 
-p five(*(10..14).to_a)        #→ "I was passed 10 11 12 13 14" 
+def five(a, b, c, d, e)
+"I was passed #{a} #{b} #{c} #{d} #{e}"
+end
+p five(1, 2, 3, 4, 5 )        #→ "I was passed 1 2 3 4 5"
+p five(1, 2, 3, *['a', 'b'])  #→ "I was passed 1 2 3 a b"
+p five(*(10..14).to_a)        #→ "I was passed 10 11 12 13 14"
 
 
 
@@ -116,10 +117,10 @@ p five(*(10..14).to_a)        #→ "I was passed 10 11 12 13 14"
 
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            BLOCKS
-#                                                
+#
 # => {}
 
 def oi
@@ -152,14 +153,14 @@ end
 
 repetidor(3) { puts "oi" }
 
-def fib_up_to(max) 
-  i1, i2 = 1, 1 # parallel assignment (i1 = 1 and i2 = 1) 
-  while i1 <= max 
-    yield i1 
-    i1, i2 = i2, i1+i2 
-  end 
-end 
-fib_up_to(2000) {|f| print f, " " } 
+def fib_up_to(max)
+  i1, i2 = 1, 1 # parallel assignment (i1 = 1 and i2 = 1)
+  while i1 <= max
+    yield i1
+    i1, i2 = i2, i1+i2
+  end
+end
+fib_up_to(2000) {|f| print f, " " }
 
 
 1.step(100,12) { |i| puts i }
@@ -169,10 +170,10 @@ fib_up_to(2000) {|f| print f, " " }
 
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            PROC
-#                                                
+#
 #
 #=Rodar procedures
 #Interessante...
@@ -228,11 +229,11 @@ le, creve = box
 #Xout.x(le.call, creve.call(2), le.call)
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            CLASSES
-#                                                
-# 
+#
+#
 
 class XxMain
   def teste
@@ -248,7 +249,7 @@ class Pessoa
   attr_accessor :sexo
   attr_reader  :greet # => , :idade
   attr_writer  :bio
-  
+
   def initialize(nome, idade)
   # defined?(@@npessoas) ? @@npessoas += 1 : @@npessoas = 1
     @@npessoas = defined?(@@npessoas) ? @@npessoas += 1 : 1
@@ -274,9 +275,9 @@ class Pessoa
   def diferenciado(outro)
     (self.idade - outro.idade).abs # => abs -11 = 11
   end
-    
+
   private
-  
+
   def set_nome(nome)
     nome += " zehninguem" unless nome.include?(' ')
     first_nome, last_nome = nome.split(/\s+/)
@@ -289,9 +290,9 @@ class Pessoa
   def set_last_nome(nome)
     @last_nome = nome
   end
-  
+
   public
-  
+
   def rock
     @rock = true
   end
@@ -304,7 +305,7 @@ class Pessoa
   def secar (x)
     x.times { puts 'secando'}
   end
-  
+
   protected :idade
 end
 
@@ -335,7 +336,7 @@ class Amigo
   attr_accessor :nome
   attr_reader :situacao
   attr_writer :apologia
-  
+
   def initialize(nome = "Mundo")
     @nome = nome
   end
@@ -361,17 +362,17 @@ joao.diz_oi
 class SuperAmigo
   attr_accessor :nomes
   @@ideia = "amizade"
-  
+
   def initialize(nomes = "mundo")
     @nomes = nomes
   end
-  
+
   def dizer_oi
     if @nomes.nil?
       puts "..."
     elsif @nomes.respond_to?("each")
-      @nomes.each do |n| 
-        puts "Oi #{n}" 
+      @nomes.each do |n|
+        puts "Oi #{n}"
       end
     else
       puts "Ola #{nomes}"
@@ -390,9 +391,9 @@ class SuperAmigo
   end
 
 end
-  
+
 if __FILE__ == $0
-  
+
   nux = SuperAmigo.new(%w{rup rup rup rup rupa})
 
   nux.nomes = ["oia", "muiia", "buia", "puia"]
@@ -403,7 +404,7 @@ if __FILE__ == $0
   puts nux.kind_of?(Integer)
   puts nux.class
 
-    
+
 end
 
 
@@ -441,7 +442,7 @@ class Domestico < Dog
   def multibark
     super(10)
   end
-  
+
 end
 
 novocao = Dog.new("rex")
@@ -474,7 +475,7 @@ puts Fixnum.included_modules
 
 
 class XArray < Array
-  
+
   def join( sep = $,, format = "%s")
     collect do |i|
       sprintf( format, i)
@@ -492,7 +493,7 @@ p ar.join(', ', "%d bed")
 class Loteria
   NRANGE = 1..25
   attr_reader :picks, :purchs
-  
+
   def initialize ( *picks )
     if picks.length != 3
       raise ArgumentError, "Me venha com 3 numberos"
@@ -504,7 +505,7 @@ class Loteria
     @picks = picks
     @purchs = Time.now
   end
-  
+
   def self.new_random
     new( rand(25) + 1, rand(25) + 1, rand(25) + 1 )
   rescue ArgumentError
@@ -529,7 +530,7 @@ class LoteriaDraw
     @@tickets[c] += tickets
   end
 end
-class << LoteriaDraw 
+class << LoteriaDraw
   def play
     final = Loteria.new_random
     winners = {}
@@ -562,16 +563,16 @@ puts tick.score(sorteio)
 #   puts w + "ganhou" + t.length + "ticks"
 # end
 
-# # # # # # 
+# # # # # #
 #
 #                                                         ACCESS CONTROL
-#                                                
-# 
+#
+#
 puts "boteco \n\n"
 
 class Boteco
   def banheirao;    puts "stinks";  end
-  
+
   def go_banheiro
     banheiro
   end
@@ -579,13 +580,13 @@ class Boteco
   def go_suite
     suite
   end
-  
+
   protected
   def banheiro;    puts "someone farted here";  end
-  
+
   private
   def suite;    puts "soh meu";  end
-  
+
 end
 
 bar = Boteco.new
@@ -606,36 +607,36 @@ class Protector
   attr_reader :secret_data
 end
 
-# # # # # # 
+# # # # # #
 #
 #                                                         OPERATORs
-#                                                
-# 
-# Enumerable , [] 
+#
+#
+# Enumerable , []
 
-class VU 
-  include Comparable 
-  attr :volume 
-  def initialize(volume) # 0..9 
-    @volume = volume 
-  end 
-  def inspect 
-    '#' * @volume 
-  end 
-  # Support for ranges 
-  def <=>(other) 
-    self.volume <=> other.volume 
-  end 
-  def succ 
-    raise(IndexError, "Volume too big") if @volume >= 9 
-    VU.new(@volume.succ) 
-  end 
+class VU
+  include Comparable
+  attr :volume
+  def initialize(volume) # 0..9
+    @volume = volume
+  end
+  def inspect
+    '#' * @volume
+  end
+  # Support for ranges
+  def <=>(other)
+    self.volume <=> other.volume
+  end
+  def succ
+    raise(IndexError, "Volume too big") if @volume >= 9
+    VU.new(@volume.succ)
+  end
   def self.[](from_vu, to_vu)
     VU.new(from_vu)..VU.new(to_vu)
   end
-end 
+end
 
-medium_volume = VU.new(4)..VU.new(7) 
+medium_volume = VU.new(4)..VU.new(7)
 medium_volume.to_a.each { |v| puts v.volume }
 vuu = VU.new(3)
 puts medium_volume.include?(VU.new(3))
@@ -644,11 +645,11 @@ max_volume = VU[2,3]
 p max_volume
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                         MIXINS
-#                                                
-# 
+#
+#
 
 module Summable
   def sum
@@ -669,11 +670,11 @@ p ('a'..'m').sum
 
 
 Xout.x()
-# # # # # # 
+# # # # # #
 #
 #                                                         SINGLETON
-#                                                
-# 
+#
+#
 # => Método dado só a um objeto... instancia
 
 class SingletonTest
@@ -690,8 +691,8 @@ def t2.size # => SINGLETON METHOD
 end
 
 #Xout.x("singleton", t1.size, t2.size)
- 
-# # # # # # 
+
+# # # # # #
 #
 #                                                            MODULES
 #
@@ -703,7 +704,7 @@ end
 puts Math.sqrt(2) # 1.4142135623731
 
 puts Math::PI # 3.14159265358979
- 
+
 class MinhaMath
   include Math
   puts PI
@@ -747,7 +748,7 @@ a.modelo = "Hafz"
 
 class AllVogal
   include Enumerable
-  
+
   @@vogal = %w{a e i o u}
   def each
     @@vogal.each { |v| yield v }
@@ -767,7 +768,7 @@ class Song
   def <=>(o)
     @len <=> o.len
   end
-  
+
   def initialize(sname, len)
     @sname = sname
     @len = len
@@ -779,10 +780,10 @@ c = Song.new('Afrociberdelia', 500)
 
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            RESCUE
-#                                                
+#
 #
 
 def primera_linha(filename)
@@ -805,10 +806,10 @@ end
 #Xout.x()
 
 
-# # # # # # 
+# # # # # #
 #
 #                                                            REGEX
-#                                                
+#
 #
 #
 # ^ LINE START
@@ -835,7 +836,7 @@ end
 # {x,y} at least x occurrences and at most y occurrences.
 
 # achar perl python   /Perl|Python/ .... ou ..... /P(erl|ython)/
-# achar abc ... /abc/  
+# achar abc ... /abc/
 # abbbbc .... /ab+c/
 # a com varios ou nenhum b, c  /ab*c/
 
@@ -870,11 +871,11 @@ meuregex = /\d+\,\d{2}/
 #meuregex = /\d{2}/
 if linha =~ meuregex
   puts 'terminando...'
-  
+
 else
   linha += '0'
   puts linha
-  
+
 end
 
 frutas = ['pedro', 'verav', 'verao']
@@ -937,11 +938,11 @@ end
 hexa("f<0xsfs<0x44>")
 
 
-re = /(\d+):(\d+)/ # match a time hh:mm 
-md1 = re.match("Time: 12:34am") 
-md2 = re.match("Time: 10:30pm") 
-p md1[1, 2]# → ["12", "34"] 
-p md2[1, 2]# → ["10", "30"] 
+re = /(\d+):(\d+)/ # match a time hh:mm
+md1 = re.match("Time: 12:34am")
+md2 = re.match("Time: 10:30pm")
+p md1[1, 2]# → ["12", "34"]
+p md2[1, 2]# → ["10", "30"]
 
 #Xout.x()
 

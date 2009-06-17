@@ -39,7 +39,7 @@ def dance
   p "Chamando"
   r1 = yield("primeiro")
   p "Resultado #{r1}"
-  
+
   p "Chamando denovo"
   r2 = yield("segundo")
   p "Resultado #{r2}"
@@ -48,7 +48,7 @@ end
 dance do |x|
   p "chamando #{x} vezes"
   x == "primeiro" ? 1 : 2
-end  
+end
 
 def retornaproc
   a = Proc.new { return "returrn" }
@@ -72,4 +72,4 @@ end
 
 def caluer(&block)
   raise unless block_given?
-  
+end
