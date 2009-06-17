@@ -1,0 +1,4 @@
+# Keyboard Layout 'macintosh'
+# Making Left Super works as AltGr
+clear mod4
+keysym Super_L = ISO_Level3_Shift
