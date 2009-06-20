@@ -1,12 +1,13 @@
 # -*- mode: ruby; -*-
-%w{irb/completion irb/ext/save-history pp rubygems benchmark}.map(&method(:require))
+#require 'rubygems'
+%w{irb/completion irb/ext/save-history pp rubygems benchmark tempfile}.map(&method(:require))
 begin
   require 'what_methods'
 rescue LoadError; end
 
 begin
   require "wirble"
-  Wirble.init(:skip_prompt=>true,:skip_history=>true)
+  Wirble.init(:skip_prompt=>true,:skip_history=>false,:history_size=>5000)
   Wirble.colorize
 rescue LoadError => e
   puts "Seems you don't have Wirble installed: #{e}"
@@ -51,28 +52,38 @@ class Object
   end
 end
 
-class Array
-  alias :__orig_inspect :inspect
-  def inspect
-    (length > 20) ? "[#{first}, ... #{length} elements ...,#{last}]" : __orig_inspect
-  end
-end
+#class Array
+#  alias :__orig_inspect :inspect
+ # def inspect
+ #   (length > 20) ? "[#{first}, ... #{length} elements ...,#{last}]" : __orig_inspect
+ # end
+#end
 
-class Hash
-  alias :__orig_inspect :inspect
-  def inspect
-    (length > 20) ? "{:#{[keys[0]]} => #{[values[0]]}, ... #{length} keys ... }" : __orig_inspect
-  end
-end
+#class Hash
+#  alias :__orig_inspect :inspect
+#  def inspect
+#    (length > 20) ? "{:#{[keys[0]]} => #{[values[0]]}, ... #{length} keys ... }" : __orig_inspect
+#  end
+#end
 
 #
-# Instance
+# Benchmark
 #
+
+# quick { block }
+# quick(n) { block }
 def quick(repetitions=100, &block)
   Benchmark.bmbm do |b|
     b.report {repetitions.times &block}
   end
   nil
+end
+
+# q n, lambda{ }, lambda{ } ...
+def q(rep = 100000, *stuff)
+  Benchmark.bmbm do |b|
+    stuff.each { |s| b.report { rep.times &s } }
+  end
 end
 
 # RI access
@@ -103,6 +114,7 @@ rescue => e
   puts "Error on vim: #{e}"
 end
 puts "Vim available."
+alias vi vim
 
 
 #
