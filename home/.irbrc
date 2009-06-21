@@ -80,10 +80,16 @@ def quick(repetitions=100, &block)
 end
 
 # q n, lambda{ }, lambda{ } ...
-def q(rep = 100000, *stuff)
-  Benchmark.bmbm do |b|
-    stuff.each { |s| b.report { rep.times &s } }
+def q(*stuff)
+  rep = stuff.select{ |s| s.kind_of? Numeric }
+  rep.length == 0 ? rep = [1_000_000] : stuff -= rep
+  rep.each do |r|
+    puts "\n                         Running #{r} times"
+    Benchmark.bmbm do |b|
+      stuff.each { |s| b.report { r.times &s } }
+    end
   end
+  "-----------------------------------------"
 end
 
 # RI access
@@ -95,8 +101,8 @@ def reset_irb()
   exec $0
 end
 
-
-# configure vim
+#
+# Vim
 @irb_temp_code = nil
 
 def vim(file=nil)
