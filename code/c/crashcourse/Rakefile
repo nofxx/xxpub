@@ -1,0 +1,16 @@
+require 'rake/clean'
+CC = "gcc"
+SRC = FileList['*.c']
+OBJ = SRC.ext('')
+
+CLEAN << SRC.map { |f| f.gsub(".c", "") } #FileList['*.o']
+CLOBBER << CLEAN
+
+task :build do
+  SRC.each do |f|
+    # Link against libs -lm
+    sh "cc -lm -o #{f.gsub('.c','')} #{f}"
+  end
+end
+
+task :default => [:build]
