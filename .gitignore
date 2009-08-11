@@ -1,3 +1,6 @@
 .DS_Store
 *.o
 *.cache
+*.out
+*.so
+*.linkinfo
