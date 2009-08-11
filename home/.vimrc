@@ -13,9 +13,11 @@ set shiftwidth=2
 set autoindent
 set smarttab
 
+colorscheme delek
+
 " Switch to the directory of open file
 " autocmd BufEnter * lcd %:p:h
 "
 " " These two remove annoying blinking and noise
 " set novisualbell
-" set noerrorbells 
+" set noerrorbells

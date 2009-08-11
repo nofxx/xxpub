@@ -1,0 +1,22 @@
+require 'rake/clean'
+CC = "cc"
+CLEAN << FileList['*.o']
+CLOBBER << FileList['hello']
+
+SRC = FileList['*.c']
+OBJ = SRC.ext('o')
+
+rule '.o' => '.c' do |t|
+  sh "cc -c -o #{t.name} #{t.source}"
+end
+
+file "xlib" => OBJ do
+  sh "cc -o xlib #{OBJ}"
+end
+
+# File dependencies go here ...
+file 'main.o' => ['main.c', 'xlib.h']
+#file 'xlib.o' => ['xlib.c']
+
+
+task :default => [:xlib]

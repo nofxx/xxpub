@@ -3,6 +3,7 @@
 %w{irb/completion irb/ext/save-history pp rubygems benchmark tempfile}.map(&method(:require))
 begin
   require 'what_methods'
+  require 'map_by_method'
 rescue LoadError; end
 
 begin
@@ -70,23 +71,23 @@ end
 # Benchmark
 #
 
-# quick { block }
-# quick(n) { block }
-def quick(repetitions=100, &block)
+# q { block }
+# q(n) { block }
+def q(repetitions=100, &block)
   Benchmark.bmbm do |b|
     b.report {repetitions.times &block}
   end
   nil
 end
 
-# q n, lambda{ }, lambda{ } ...
-def q(*stuff)
-  rep = stuff.select{ |s| s.kind_of? Numeric }
-  rep.length == 0 ? rep = [1_000_000] : stuff -= rep
+# b n, lambda{ }, lambda{ } ...
+def b(*stuff)
+  rep, stuff = stuff.partition{ |s| s.kind_of? Numeric }
+  rep.length ||= [1_000_000]
   rep.each do |r|
     puts "\n                         Running #{r} times"
     Benchmark.bmbm do |b|
-      stuff.each { |s| b.report { r.times &s } }
+      stuff.each { |s| b.report(s .to_s) { r.times &s } }
     end
   end
   "-----------------------------------------"
@@ -112,14 +113,13 @@ def vim(file=nil)
   if(File.exists?(file) && File.size(file)>0)
     Object.class_eval(File.read(file))
     @irb_temp_code = file
-    "File loaded from Vim."
+    "Vim.vidi.run!"
   else
     "No file loaded."
   end
 rescue => e
   puts "Error on vim: #{e}"
 end
-puts "Vim available."
 alias vi vim
 
 
@@ -160,3 +160,5 @@ end
 #
 HASH = { :one => 'Marley', :two => 'Barley', :three => 'Harley', :four => 'Farley'} unless defined?(HASH)
 ARRAY = HASH.keys unless defined?(ARRAY)
+
+at_exit { puts "Teh mais bro!" }

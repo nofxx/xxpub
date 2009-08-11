@@ -1,0 +1,16 @@
+require 'rake/clean'
+CC = "gcc"
+SRC = FileList['*.cu']
+OBJ = SRC.ext('')
+
+CLEAN << SRC.map { |f| f.gsub(".cu", "") } #FileList['*.o']
+CLOBBER << CLEAN
+
+task :build do
+  SRC.each do |f|
+    # Link against libs -lm
+    sh "nvcc  -o #{f.gsub('.cu','')} #{f}" #-lm
+  end
+end
+
+task :default => [:build]

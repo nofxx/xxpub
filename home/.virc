@@ -85,11 +85,11 @@ set ignorecase  " search ignores case
 
 " turn off error beep/flash
 set noerrorbells
-set visualbell 
-set t_vb=   
+set visualbell
+set t_vb=
 if has('autocmd')
     autocmd GUIEnter * set vb t_vb=
-endif 
+endif
 
 if &t_Co > 2 || has("gui_running")
   syntax on
@@ -97,4 +97,4 @@ if &t_Co > 2 || has("gui_running")
   nohlsearch
 endif
 
-colorscheme darkblue
+colorscheme delek
