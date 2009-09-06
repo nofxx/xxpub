@@ -10,15 +10,17 @@ out = %x(./runned.sh)
 
 out += "ei ei eicharlie bili bili \n billi"
 
-if out.include? "ei" 
+if out.include? "ei"
   puts "sim"
 end
 
 puts out
 
-
+p SOME_ENV if defined?(SOME_ENV)
+p ENV["FOO"]
+p ARGV
 #foi = system("./runned.sh")
 #puts foi # true
 
-#exec "./runned.sh" 
+#exec "./runned.sh"
 
