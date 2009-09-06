@@ -6,50 +6,7 @@ begin
   require 'map_by_method'
 rescue LoadError; end
 
-# WIRBLE
-begin
-  require "wirble"
-  Wirble.init(:skip_prompt=>true,:skip_history=>false,:history_size=>5000)
-  Wirble.colorize
-rescue LoadError => e
-  puts "Seems you don't have Wirble installed: #{e}"
-end
 
-# HIRB
-begin
-  require "hirb"
-  extend Hirb::Console
-rescue LoadError => e
-  puts "Install hirb!!: #{e}"
-end
-
-# LOOKSEE
-begin
-  require "looksee"
-  require "looksee/shortcuts"
-rescue LoadError => e
-  puts "Install Looksee! oggy-looksee"
-end
-
-#
-# Prompt stuff
-#
-IRB.conf[:AUTO_INDENT] = true
-IRB.conf[:SAVE_HISTORY] = 2000
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb.history"
-
-if IRB.conf[:PROMPT]
-  IRB.conf[:PROMPT][:SNAZZY] = {
-    :PROMPT_I => ">> ",
-    :PROMPT_C => "*> ",
-    :PROMPT_N => "%i> ",
-    :PROMPT_S => "%l> ",
-    :RETURN   => "=> %s\n"
-  }
-  IRB.conf[:PROMPT_MODE] = :SNAZZY
-end
-
-#
 # Class
 #
 class Object
@@ -128,25 +85,27 @@ if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
   RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
 end
 
-# Called after the irb session is initialized and Rails has
-# been loaded (props: Mike Clark).
-IRB.conf[:IRB_RC] = lambda do
-  if defined?(ActiveRecord::Base)
-    begin
-      name = User.column_names.include?("name")
-      login = User.column_names.include?("login")
-      if name || login
-        instance_eval <<RUBY
+unless RUBY_VERSION > '1.9'
+  # Called after the irb session is initialized and Rails has
+  # been loaded (props: Mike Clark).
+  IRB.conf[:IRB_RC] = lambda do
+    if defined?(ActiveRecord::Base)
+      begin
+        name = User.column_names.include?("name")
+        login = User.column_names.include?("login")
+        if name || login
+          instance_eval <<RUBY
           def method_missing(name, *args, &block)
             super unless args.empty? && block.nil?
             instance_variable_get("@user_\#{name}") ||
             instance_variable_set("@user_\#{name}", User.find_by_#{name ? 'name' : 'login'}(name.to_s))
          end
 RUBY
+        end
+      rescue
       end
-    rescue
+      ActiveRecord::Base.logger = Logger.new(STDOUT)
     end
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 end
 
