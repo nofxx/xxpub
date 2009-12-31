@@ -27,8 +27,8 @@ static VALUE t_calc(VALUE self, VALUE obj)
 }
 VALUE cTest;
 
-void Init_xctest() { 
-  cTest = rb_define_class("XcTest", rb_cObject); 
+void Init_nada() { 
+  cTest = rb_define_class("Nada", rb_cObject); 
   rb_define_method(cTest, "initialize", t_init, 0); 
   rb_define_method(cTest, "add", t_add, 1); 
   rb_define_method(cTest, "somero", t_calc, 1);

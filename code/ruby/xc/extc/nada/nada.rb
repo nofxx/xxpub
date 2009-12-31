@@ -1,4 +1,4 @@
-class XcTest
+class Nada
   def initialize
     @arr = Array.new
     @point = 0.0

@@ -1,7 +1,7 @@
 require 'xc_test'
 require 'test/unit'
 
-class TestXcTest < Test::Unit::TestCase
+class NadaTest < Test::Unit::TestCase
   def test_xc_test
     t = XcTest.new
     assert_equal(Object, XcTest.superclass)

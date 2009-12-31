@@ -1,4 +1,5 @@
-#codestacker.com
+
+# #codestacker.com
 #created by henryhamon — 14 August 2008
 class Cpf  
   def check_cpf(cpf=nil)
