@@ -1,0 +1,3 @@
+code:add_patha(".").
+code:add_patha("ebin").
+%io:format("Running...erl.\n").

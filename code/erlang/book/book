@@ -1,0 +1,14 @@
+#!/usr/bin/env escript
+
+
+main(_) ->
+  io:format("erl"),
+  morestuff(),
+  %%io:format(geo:area({sqr, 5})),
+  io:format(one:perms("nofxx")).
+  
+  
+  
+morestuff() ->
+  hi:fi("Rock"),
+  io:format("more...").
