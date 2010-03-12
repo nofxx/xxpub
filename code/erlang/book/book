@@ -1,14 +1,213 @@
 #!/usr/bin/env escript
-
+%% -*- mode: erlang -*-
 
 main(_) ->
-  io:format("erl"),
-  morestuff(),
-  %%io:format(geo:area({sqr, 5})),
-  io:format(one:perms("nofxx")).
-  
-  
-  
+    io:format("erl"),
+    morestuff(),
+    %%io:format(geo:area({sqr, 5})),
+    io:format(one:perms("nofxx")),
+    hi:comp_test(),
+    io:format("\nDone.\n"),
+    playmore(),
+    compreend(),
+    bitsyntax(),
+    valid_time({{2011,09,06},{09,04,43}}),
+    p(valid_age(55), 'valid age'),
+    type_conversion(),
+    p(one:len([1,2,3]), 'length array'),
+    p(one:tail_fac(8), 'tail recursive factorial'),
+    p(one:tail_len([1,2,3]), 'tail recursive length array'),
+    p(one:tail_reverse([1,2,3]), 'tail reverse array'),
+    p(one:tail_sublist([1,2,3,4,5], 3), 'tail sublist rray').
+
+puts(Thing) -> io:format("~p~n", [Thing]).
+p(Thing) -> io:format("~p~n", [Thing]).
+p(Thing, Desc) -> io:format("~p # ~w~n", [Thing, Desc]).
+
 morestuff() ->
   hi:fi("Rock"),
-  io:format("more...").
+  io:format("more..."),
+  Z = fun(X) -> X*2 end,
+  R = Z(2),
+  io:format("Result ~p~n", [R]).
+
+playmore() ->
+  puts(2),
+  p(atom, athlon),
+  p(2#10110101, bin),
+  p(16#FFA, hexa),
+  p(5 =:= 5, true),
+  p(4 =/= 5, true),
+  p(5 == 5.0, true),
+  p(not(5 /= 5.0), true),
+  p([1,2,3] ++ [4,5]),
+  p(hd([1,2]), 'head 1,2'),
+  p(tl([1,2]), 'tail 1,2').
+
+compreend() ->
+    p("---------------"),
+    p([X || X <- [1,2,3,4,5,6,7,8,9,10], X rem 2 =:= 0]),
+    p([X+Y || X <- [1,2], Y <- [2,3]]),
+    Weather = [{toronto, rain}, {montreal, storms}, {london, fog},
+             {paris, sun}, {boston, fog}, {vancouver, snow}],
+    FoggyPlaces =  [X || {X, fog} <- Weather],
+    p(FoggyPlaces).
+
+bitsyntax() ->
+    Pixels = <<255,0,0>>,
+    p(Pixels).
+
+%
+% Some Functions
+%
+valid_time({Date = {Y,M,D}, Time = {H,Min,S}}) ->
+    io:format("The Date tuple (~p) says today is: ~p/~p/~p,~n",[Date,Y,M,D]),
+    io:format("The time tuple (~p) indicates: ~p:~p:~p.~n", [Time,H,Min,S]);
+valid_time(_) ->
+    io:format("Stop feeding me wrong data!~n").
+
+valid_age(X) when X >= 16, X =< 104 ->   true;
+valid_age(_) ->  false.
+
+oh_god(N) ->
+    if N =:= 2 -> might_succeed;
+       true -> always_does  %% this is Erlang's if's 'else!'
+    end.
+
+type_conversion() ->
+    p(erlang:list_to_float("55.67")),
+    p(erlang:float_to_list(55.67)),
+    p(erlang:integer_to_list(10)),
+    p(erlang:list_to_integer("10")),
+    p(erlang:list_to_bitstring("10")),
+    p(erlang:bitstring_to_list(<<255>>)).
+
+%% -define(macro1, Replacement)
+%% ?macro1 % to use the macro
+%%
+
+%% c(ModuleName) % compile module on erlang
+%% cd(“dirname”) % change directory on shell
+%% f() to clear all existing bindings
+%% rr("records.hrl") to read a records file
+%% rf(record_name) to forget a record
+
+%% % Writing the value on output
+%% Io:format(“Name is: ~s~n”, [Str]).
+%% Io:fwrite(“Name is: ~s~n”, [Str]).
+%% ~n => new line
+%% ~s => string
+%% ~f => float
+%% ~w => standard output. Like Object.toString().
+%% ~p => like ~w but breaks after each line
+
+%% List = [1,2,3,4]. % lists
+%% NewList = [6, 7, List] returns [6,7, [1,2,3,4]] %
+%% appends to a new list
+%% 29> [H|T] = AList.
+%% ["a","b",{1,2,3}] % returns the Head and Tail. H
+%% and T are Unbound variables.
+%%
+%% Tuple = {1.0, 2.0, 3.0}
+%% element(2, Tuple) returns 2.0 % tuple index
+%% {_, Second, _} = Tuple stored 2.0 in Second
+%% variable % pattern matching to retrieve a value
+%% List and Tuple can contain any type.
+%% Atuple = {1,2,3}.
+%% {1,2,3}
+%% AList = ["a", "b", Atuple].
+%% ["a","b",{1,2,3}]
+%% Anewtuple = {atom1, atom2, AList}.
+%% {atom1,atom2,["a","b",{1,2,3}]
+
+
+%% Records:
+%% -record(todo, {status=reminder,who=john,text}).
+%% - to create an instance of record: X =
+%% #todo{status=urgent}.
+%% - extracting values from record is similar to
+%% pattern matching
+%% - X#todo.status %% to get a single value.
+%% - ++ is the infix append operator
+%% - [1] ++ [2] ++ [3] = [1,2,3]
+%% - X--Y is the list subtraction operator. It subtracts
+%% the elements of Y from X.
+%% Use pattern matching/recursion to replace
+%% iteration.
+%% total([{What,N|T}]) -> cost(What) * N + total(T);
+%% total([]) -> 0.
+
+%% File attributes % -import, -export, -module
+
+%% -module(ModuleName)
+%% -export([Func_a/0, Func_b/1]).
+%% - import to import the module and methods % -
+%% import(lists, [map/2]).
+%% - Includes File: -include(Filename). % -
+%% include_lib(Name).
+%% case Expression of
+%%           Pattern1 [when Guard1] -> Expr_seq1;
+%%           Pattern2 [when Guard2] -> Expr_seq2
+%% end.
+
+
+%% Functions:
+%% Anonymous:
+%% F = fun(X) -> X end. % F(10) prints 10
+%% Named:
+%%  method_name(Arg) ->
+%%     Arg.
+%%
+%%
+%% % Perform action on each element on list
+%% L = [1,2,3,4,5].
+%% [1,2,3,4,5]
+%% lists:map(fun(X) -> 2*X end, L). % using map
+%% method of lists module
+%% [2,4,6,8,10]
+%% 45> [2*X || X <- L]. % or using list
+%% comprehensions
+%% [2,4,6,8,10]
+
+
+%% atom or ‘ATOM’
+%% Macros:
+%% -define(macro1, Replacement)
+%% ?macro1 % to use the macro
+%% Erlang Shell:
+%% c(ModuleName) % compile module on erlang
+%% shell
+%% cd(“dirname”) % change directory on shell
+%% f() to clear all existing bindings
+%% rr("records.hrl") to read a records file
+%% rf(record_name) to forget a record
+
+
+%% % Writing the value on output
+%% Io:format(“Name is: ~s~n”, [Str]).
+%% Io:fwrite(“Name is: ~s~n”, [Str]).
+%% ~n => new line
+%% ~s => string
+%% ~f => float
+%% ~w=>standard output. Like Object.toString().
+%% ~p=>like ~w but breaks after each line
+
+
+% Type Conversion
+%
+% atom_to_binary/2, atom_to_list/1, binary_to_atom/2,
+% binary_to_existing_atom/2, binary_to_list/1, bitstring_to_list/1,
+% binary_to_term/1, float_to_list/1, fun_to_list/1, integer_to_list/1,
+% integer_to_list/2, iolist_to_binary/1, iolist_to_atom/1, list_to_atom/1,
+% list_to_binary/1, list_to_bitstring/1, list_to_existing_atom/1,
+% list_to_float/1, list_to_integer/2, list_to_pid/1, list_to_tuple/1,
+% pid_to_list/1, port_to_list/1, ref_to_list/1, term_to_binary/1,
+% term_to_binary/2 and tuple_to_list/1.
+%
+% is_atom/1           is_binary/1
+% is_bitstring/1      is_boolean/1        is_builtin/3
+% is_float/1          is_function/1       is_function/2
+% is_integer/1        is_list/1           is_number/1
+% is_pid/1            is_port/1           is_record/2
+% is_record/3         is_reference/1      is_tuple/1
+%

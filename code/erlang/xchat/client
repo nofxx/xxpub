@@ -1,0 +1,8 @@
+#!/usr/bin/env escript
+%% -*- mode: erlang -*-
+
+p(Thing) -> io:format("~p~n", [Thing]).
+
+main(_) ->
+    p("Starting E client..."),
+    x_client:test().

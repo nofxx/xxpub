@@ -1,0 +1,13 @@
+#!/usr/bin/env escript
+%% -*- mode: erlang -*-
+
+p(Thing) -> io:format("~p~n", [Thing]).
+p(Thing, Desc) -> io:format("~p # ~w~n", [Thing, Desc]).
+
+main(_) ->
+    p("Poor's man testing"),
+    p(geo:spherical_distance({1,1}, {2,2}), 'spherical dist'),
+    p(geo:radium({1,1}), 'radium'),
+    p(geo:theta({1,1}), 'theta 45'),
+    p(geo:bearing({1,1}, {2,2}), 'bearing 45').
+
