@@ -3,7 +3,7 @@
 -- Lua !
 --
 
-function nofxx(x)
+function triple(x)
   return x*x+x
 end
 
@@ -11,9 +11,9 @@ print "Calculadora"
 
 print "N:"
 n = io.read("*numb")
-print("Result => " .. nofxx(n))
+print("Result => " .. triple(n))
 
-function maximum (a)
+function maximum(a)
    local mi = 1          -- maximum index
    local m = a[mi]       -- maximum value
    for i,val in ipairs(a) do

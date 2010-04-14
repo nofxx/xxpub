@@ -15,7 +15,7 @@ directory 'ebin'
 
 rule ".beam" => ["%{ebin,src}X.erl"] do |t|
   begin
-    comm = "erlc -D EUNIT -pa ebin -W #{ERLC_FLAGS} -o ebin #{t.source}" 
+    comm = "erlc -D EUNIT -pa ebin -W #{ERLC_FLAGS} -o ebin #{t.source}"
     sh comm
   rescue => e
     puts "** FAIL => #{t} ** #{e}"
@@ -24,7 +24,15 @@ rule ".beam" => ["%{ebin,src}X.erl"] do |t|
 end
 
 task :compile => ['ebin'] + OBJ
-task :default => :compile
+task :default => :run
+
+desc "Open up a shell and run escript"
+task :run => [:compile] do
+  sh("./book")
+  #erl -sname #{START_MODULE} #{ERL_EBIN_PATHS} -run #{START_MODULE}")
+end
+
+
 task :eunit => [:compile] do
   puts "Modules under test:"
   OBJ.each do |obj|

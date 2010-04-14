@@ -1,6 +1,44 @@
 #!/usr/bin/env escript
 %% -*- mode: erlang -*-
 
+%%  2 + 15.
+%%  49 * 100.
+%%  1892 - 1472.
+%%  5 / 2.
+%%  5 div 2.
+%%  5 rem 2.
+%% (50 * 100) - 4999.
+%% -(50 * 100 - 4999).
+%% -50 * (100 - 4999).
+%% 2#101010.
+%% 8#0677.
+%% 16#AE.
+
+%%  atom.
+%%  atoms_rule.
+%%  atoms_rule@erlang.
+%%  'Atoms can be cheated!'.
+%%  a.tom.
+%%  atom = 'atom'.
+
+%% true and false.
+%% false or true.
+%% true xor false.
+%% not false.
+%% not (true and true).
+%%  =:= 5.     true
+%%  1 =:= 0.   false
+%%  1 =/= 0.   true
+%%  5 =:= 5.0. false
+%%  5 == 5.0.  true
+%%  5 /= 5.0.  false
+%%  5 =:=  true. false
+%%  0 == false.  false
+%%  1 < false.   true
+%%  1 < 2.  1 < 1.
+%%  1 >= 1.  1 =< 1.
+
+
 main(_) ->
     io:format("erl"),
     morestuff(),
@@ -19,6 +57,8 @@ main(_) ->
     p(one:tail_len([1,2,3]), 'tail recursive length array'),
     p(one:tail_reverse([1,2,3]), 'tail reverse array'),
     p(one:tail_sublist([1,2,3,4,5], 3), 'tail sublist rray').
+
+
 
 puts(Thing) -> io:format("~p~n", [Thing]).
 p(Thing) -> io:format("~p~n", [Thing]).
@@ -101,12 +141,10 @@ type_conversion() ->
 %% ~w => standard output. Like Object.toString().
 %% ~p => like ~w but breaks after each line
 
-%% List = [1,2,3,4]. % lists
-%% NewList = [6, 7, List] returns [6,7, [1,2,3,4]] %
-%% appends to a new list
-%% 29> [H|T] = AList.
-%% ["a","b",{1,2,3}] % returns the Head and Tail. H
-%% and T are Unbound variables.
+%% List = [1,2,3,4].
+%% NewList = [6, 7, List] returns [6,7, [1,2,3,4]] %% appends to a new list
+%% [H|T] = AList.
+%% ["a","b",{1,2,3}] % returns the Head and Tail. H and T are Unbound variables.
 %%
 %% Tuple = {1.0, 2.0, 3.0}
 %% element(2, Tuple) returns 2.0 % tuple index

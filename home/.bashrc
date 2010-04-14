@@ -6,18 +6,29 @@
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
+source /etc/profile
 
+export PATH=/usr/local/cuda/bin:$PATH
+#export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+export PAGER="most"
 #
 # PATHS
 #
-alias vi='vim'
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/home/nofxx/scripts"
-export EDITOR="vi"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/home/nofxx/scripts" # :/home/nofxx/.rvm/bin"
+export EDITOR="emacs"
 export HISTCONTROL=erasedups #rimuove i duplicati
 export HISTFILESIZE=1000000000
 export HISTSIZE=10000000        #size of history
 shopt -s histappend
 alias countcommand='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+# -- start rip config -- #
+RIPDIR="$HOME/.rip"
+RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
+PATH="$PATH:$RIPDIR/active/bin"
+export RIPDIR RUBYLIB PATH
+# -- end rip config -- #
+
 
 #
 # PS1
@@ -47,7 +58,6 @@ alias sys="vmstat 3"
 alias h='history'
 alias md5='md5sum'
 alias x="startx"
-alias xi='sudo vi'
 
 #
 # CD
@@ -116,6 +126,8 @@ alias duso="sudo du -xh --block-size=1024K | sort -nr | head -20"
 alias disco="du -sch /*"
 alias uso="du -h --max-depth=1"
 
+function e { emacs "$@"& }
+
 #
 # TAR
 #
@@ -144,6 +156,11 @@ alias svnclean='rm -rf `find . -name .svn`'
 #
 # RUBY
 #
+alias 9="rvm use 1.9.1"
+alias 8="rvm use ree"
+alias r3="rvm use 1.9.1@rails3"
+alias r="ruby -v && gem env | grep gems"
+
 function cdgem {
   cd /usr/lib/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
 }
@@ -173,7 +190,9 @@ alias aaa='AUTOFEATURE=true autospec &'
 alias sd='script/server mongrel --debugger'
 alias sb='script/dbconsole'
 alias mongs='mongrel_rails cluster::configure -e production -N 3 -c $(pwd) --user mongrel --group mongrel -p'
-alias doom='rake db:drop && rake db:create && rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate && rake db:migrate RAILS_ENV="test"'
+alias doom='rake db:drop && rake db:create && rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate && rake db:seed && rake db:migrate RAILS_ENV="test"'
+alias doomtest='rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate RAILS_ENV="test"'
+alias rr='touch tmp/restart.txt'
 
 #
 # FUNCTIONS
@@ -207,7 +226,7 @@ netinfo ()
     myip=`lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g' `
     echo
     echo “${myip}”
-    echo “—————————————————”
+    echo ""
 }
 
 #shot - takes a screenshot of your current window
@@ -222,10 +241,16 @@ translate ()
     if [[ ${#TRANSLATED} != 0 ]] ;then
         echo "\"${1}\" in ${TRANSLATED}"
     else
-        echo "Sorry, I can not translate \"${1}\" to Portuguese (Brazil)"
+        echo "Sorry, I can not translate \"${1}\""
     fi
 }
 
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+
+export MAGLEV_HOME=/home/nofxx/git/maglev
+export PATH=$MAGLEV_HOME/bin:$PATH
+
+if [[ -s /home/nofxx/.rvm/scripts/rvm ]] ; then source /home/nofxx/.rvm/scripts/rvm ; fi

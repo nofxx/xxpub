@@ -86,7 +86,7 @@ print(type(type))           --> function
 print(type(true))           --> boolean
 print(type(nil))            --> nil
 print(type(type(X)))        --> string
-print(type(a))   --> nil   (`a' is not initialized)
+print(type(a))              --> nil   (`a' is not initialized)
 a = 10
 print(type(a))   --> number
 a = "a string!!"
@@ -142,3 +142,23 @@ weird =    {x=10, y=45; "one", "two", "three"}
 for i,line in ipairs(weird) do
    print(line)
 end
+
+x = 10 or 20
+print(x)
+
+-- n % 2 == 0 ? "par" : "impar"
+s = (n % 2 == 0) and "par" or " ́mpar"
+
+Rectangle = {
+  w = 0,
+  h = 0
+}
+
+function Rectangle.new (self, o)
+  o = o or {}
+  setmetatable (o, self)
+  self.__index = self
+  return o
+end
+
+print(Rectangle.new({h = 6, w = 8}))
