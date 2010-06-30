@@ -11,3 +11,8 @@
 gem install rvm bundler what_methods thin unicorn eventmachine bugs_bunny\
     wirble hirb awesome_print ghi
 
+
+
+rvm install ree
+rvm install rbx
+rvm install 1.9.2
