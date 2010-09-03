@@ -1,0 +1,43 @@
+require 'rake/clean'
+CC = "g++"
+CLEAN << FileList['**/*.o', '**/*.cache']
+CLOBBER << FileList['m']
+
+HDRS = FileList['*.h']
+SRC = FileList['*.c', '*.cpp', 'src/*.cpp']
+OBJ = SRC.ext('o')
+
+rule '.o' => '.c' do |t|
+  sh "gcc -Wall -ansi -g -c #{t.source} -o #{t.name}"
+end
+
+rule '.o' => '.cpp' do |t|
+  sh "g++ -Wall -ansi -g -c #{t.source} -o #{t.name}"
+end
+
+file "m" => OBJ do
+  sh "g++ -o m #{OBJ}"
+end
+
+
+
+task :default => [:build]
+
+desc "Build the test executable"
+task :build => ['m']
+
+# File dependencies go here ...
+#file 'main.o' => ['main.c', 'hi.h']
+#file 'hi.o' => ['hi.c']
+#file 'main.obj'=>['main.cpp']+HDRS
+file 'm' => OBJ
+
+# require 'rubygems' if RUBY_VERSION < '1.9'
+# require 'rake'
+# require 'rake/builder'
+
+# Rake::Builder.new do |builder|
+#   builder.target               = 'm'
+#   builder.source_search_paths  = [ 'src' ]
+#   builder.header_search_paths  = [ 'include' ]
+# end
