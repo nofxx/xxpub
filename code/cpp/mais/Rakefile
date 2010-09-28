@@ -19,8 +19,6 @@ file "m" => OBJ do
   sh "g++ -o m #{OBJ}"
 end
 
-
-
 task :default => [:build]
 
 desc "Build the test executable"
@@ -28,7 +26,6 @@ task :build => ['m']
 
 # File dependencies go here ...
 #file 'main.o' => ['main.c', 'hi.h']
-#file 'hi.o' => ['hi.c']
 #file 'main.obj'=>['main.cpp']+HDRS
 file 'm' => OBJ
 
