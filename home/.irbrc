@@ -2,6 +2,7 @@
 #require 'rubygems'
 %w{irb/completion irb/ext/save-history pp rubygems benchmark tempfile}.map(&method(:require))
 
+# ap -> awesome_print
 %w{what_methods ap}.each do |mod|
   begin
   require mod
@@ -48,7 +49,7 @@ end
 class Object
    include Hirb::Console
   def local_methods(obj = self)
-    (obj.methods - (obj.class.superclass || Object).instance_methods).sort
+    (obj.methods - (obj.class.superclass || Object).instance_methods).map(&:to_s).sort
   end
 
   def table_methods
@@ -79,7 +80,7 @@ end
 # q(n) { block }
 def q(repetitions=100, &block)
   Benchmark.bmbm do |b|
-    b.report {repetitions.times &block}
+    b.report {repetitions.times { block.call }}
   end
   nil
 end
@@ -89,12 +90,18 @@ def b(*stuff)
   rep, stuff = stuff.partition{ |s| s.kind_of? Numeric }
   rep.length ||= [1_000_000]
   rep.each do |r|
-    puts "\n                         Running #{r} times"
+    puts "\nRunning -> #{r} times"
     Benchmark.bmbm do |b|
-      stuff.each { |s| b.report(s .to_s) { r.times &s } }
+      stuff.each_with_index do |s, i|
+        if s.respond_to?(:call)
+          b.report("Lambda ##{i}") { r.times { s.call } }
+        else
+          b.report(s.inspect) { r.times { eval(s.to_s) } }
+        end
+      end
     end
   end
-  "-----------------------------------------"
+  "DONE"
 end
 
 # RI access
