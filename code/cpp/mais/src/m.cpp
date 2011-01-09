@@ -1,9 +1,16 @@
 // Some C++
 
-#include <iostream>
+#include <iostream>  // cin, cout...
+#include <iomanip>   // setprecision
+#include <algorithm> // sort
+#include <string>
+#include <vector>
+#include <ios>
+
+// C
 #include <cstdlib>
 #include <cstring>
-#include <string>
+
 using namespace std;
 
 #define FU 1
@@ -27,6 +34,10 @@ struct girl {
   string name;
 };
 
+union u_tag {
+  char c[4];
+  int ival;
+} u;
 
 int main() {
   sayhi();
@@ -39,7 +50,7 @@ int main() {
   strcpy (cstr, str.c_str());
 
   p = atoi(cstr) + 5;
-  cout << "P: " << p;
+  cout << "P: " << p << endl;
   int age = 20;
   int x = 8;
   //int ary[3];           warning: extended initializer lists only
@@ -47,6 +58,12 @@ int main() {
   int ary[5][5];
   ary[1][1] = 8;
   x += age;
+
+  float flutua = 56.887;
+  double boia  = 56.9999;
+  cout << "Float -> " << flutua;
+  cout << " Doube -> " << boia << endl;
+
   // cin >> age;
   // getline (cin, mystr);
   // cout << ">> " << age << " <<\n";
@@ -120,11 +137,43 @@ int main() {
   // ptr -> key;
   cout << "Naomi: " << naomi.hot << " ptr " << gptr -> age;
 
+  string stest = "Hey there";
+  string stest2(10, '*');
+  cout << endl << stest + "..." << stest2 << endl;
+  cout << stest.size() << " chars" << endl;
+
+
+  cout << "\nBYTEC\n";
+  char bytec = '1';
+  cout << int(bytec);
+
+  char* cmdbuf;
+
+  cout << "\n" "auto " "concat" << endl;
+
+  vector<double> vtest;
+  vtest.push_back(9.1);
+  vtest.push_back(8.1);
+  vtest.push_back(5.1);
+  double xx = vtest[1];
+
+  typedef vector<double>::size_type vec_sz;
+  vec_sz size = vtest.size();
+
+  sort(vtest.begin(), vtest.end());
+
+  cout << "Vector..." << size << " - " << xx << endl;
+
+
+  for(int i=0; i< size; i++) {
+    cout << "V[" << i << "] " << vtest[i] << endl;
+  }
+
+  //  cout << "\nCMDBUF: " << *cmdbuf;
 
 
   cout << endl;
   return 0;
 
 }
-
 
