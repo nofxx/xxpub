@@ -41,12 +41,14 @@ SAVEHIST=10000000
 #
 #  Keys
 #
-bindkey '^BKP' backward-delete-word
+#bindkey '^BKP' backward-delete-word
 bindkey '^D' exit
 bindkey -e
 bindkey '^[^[[D' backward-word
 bindkey ';5D' backward-word
 bindkey ';5C' forward-word
+bindkey '5D' backward-word
+bindkey '5C' forward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
