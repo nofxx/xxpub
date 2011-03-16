@@ -8,11 +8,13 @@
 # https://github.com/garybernhardt/dotfiles/tree/master/.zsh/func
 # http://dzen.geekmode.org/wiki/wiki.cgi/-main/ZshConfiguration
 # https://github.com/ryanb/dotfiles/blob/master/zshrc
+# http://www.rayninfo.co.uk/tips/zshtips.html
 #
 fpath=($fpath $HOME/.zsh/func)
 typeset -U fpath
 autoload -Uz compinit
 compinit
+# source $HOME/.zsh/plugins/_gem
 
 #
 #  Completion
@@ -68,6 +70,9 @@ bindkey "\e\e[D" backward-word
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 
+# C-z C-z send to background (don't suspend)
+bg() { builtin bg; zle -I }; zle -N bg; bindkey '^Z' bg
+
 #
 #  Options
 #
@@ -77,19 +82,22 @@ fignore=(.o .c~ .old .pro)
 
 # cd opt | autopushd pushdminus pushdsilent pushdtohome
 setopt autocd # foo -> cd foo
+setopt autopushd
 setopt cdablevars
 setopt pushd_ignore_dups
 # job control | auto_resume notify check_jobs
 setopt nohup
-setopt ignoreeof
+#setopt ignoreeof
 setopt long_list_jobs
 setopt interactivecomments
 # history
-setopt nobanghist
+#setopt nobanghist
 setopt share_history
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt hist_ignore_dups
+setopt hist_save_no_dups
+#setopt hist_ignore_all_dups
 # dunno
 setopt noclobber
 setopt promptsubst
@@ -124,9 +132,9 @@ alias d='dirs -v'
 # CD
 alias c='cd ..'
 alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+alias -g ...='cd ../..'
+alias -g ....='cd ../../..'
+alias -g .....='cd ../../../..'
 alias -- -='cd -'
 
 # SERVICE
@@ -219,6 +227,7 @@ alias doomtest='rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test"
 alias rr='touch tmp/restart.txt'
 
 alias countcommand='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+alias fullup='ys && _ gem update && _ npm update'
 
 # Global aliases -- These do not have to be
 # at the beginning of the command line.
