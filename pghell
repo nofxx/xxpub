@@ -1,0 +1,20 @@
+/etc/rc.d/postgresql stop
+export PGROOT="/var/lib/postgres"
+rm -rf $PGROOT
+mkdir -p $PGROOT/data && chown postgres.postgres $PGROOT/data
+su - postgres -c "/usr/bin/initdb -E utf8 --locale=en_US.UTF-8 $PGROOT/data"
+
+# su postgres
+/etc/rc.d/postgresql start
+createdb -U postgres template_postgis -T template1
+psql -U postgres template1 -c "UPDATE pg_database SET datistemplate = TRUE where datname = 'template_postgis';"
+
+#\c template_postgis
+psql -U postgres template_postgis -c "CREATE LANGUAGE plpgsql;"
+
+psql -U postgres -c "\i /usr/share/postgresql/contrib/postgis-1.5/postgis.sql;"
+psql -U postgres -c "\i /usr/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql;"
+
+psql -U postgres template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;GRANT ALL ON spatial_ref_sys TO PUBLIC;VACUUM FREEZE;"
+
+echo "DONE"
