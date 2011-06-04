@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      ROCKs
+    </title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.disabler.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div title="rocks" class="book">
+
+      <div id="titlepage">
+        <div>
+          <div>
+            <h1 class="title">
+              cool?
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form accept-charset="UTF-8" action="/items" class="new_item" id="new_item" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="2ObWBFGQS6VQ8VsXqUdd+JeTOnhjQg7ERpe1+EW/MT0=" /></div>
+      <div class='container_12' id='item_form'>
+        <div class='grid_3'>
+          <div class='field'>
+            <label for="item_doc">Uno</label>
+            <input id="item_doc" name="item[doc]" size="30" type="text" />
+          </div>
+          <div class='field'>
+            <label for="item_date">Dos</label>
+            <input id="item_date" name="item[date]" size="30" type="text" />
+            <em>Formato: xx/xx/xxxx</em>
+          </div>
+        </div>
+        <div class='grid_3'>
+          <div class='field'>
+            <label for="item_code">Tres</label>
+            <input id="item_code" name="item[code]" size="30" type="text" />
+            <!-- /%em 6 dígitos, preceda com 0 para menos. -->
+          </div>
+
+          <div class='field'>
+            <label for="item_value">US$</label>
+            <input id="item_value" name="item[value]" size="30" type="text" value="0,00" />
+          </div>
+
+        </div>
+      </div>
+    </form>
+    <input type="button" value="Disable" name="commit" id="item_disable">
+    <input type="button" value="Enable" name="commit" id="item_enable">
+    <input type="button" value="Toggle" name="commit" id="item_toggle">
+    <script type="text/javascript" src="app.js"></script>
+
+  </body>
+</html>
+

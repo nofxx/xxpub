@@ -50,5 +50,32 @@ d = new Deep 200
 log d.ask()
 # log d.other() # no meth..
 #
-f = nada()
-log f, nada#, this
+# f = nada()
+# log f, nada#, this
+#
+#
+# Create a scope for var key! do (key) ->
+list = [1,8,9]
+flist = []
+
+for key in list
+  do (key) ->
+    flist.push () ->
+      "Hi from #{key}"
+
+console.log flist[0]()
+
+console.log "FINITO"
+
+outer =
+  name: 'outer'
+  outer_f: () ->
+    self = @
+    inner =
+      name: 'inner'
+      inner_f: () ->
+        console.log "self.name: #{self.name}"
+        console.log "@name: #{@name}"
+    inner.inner_f()
+    console.log(@name)
+outer.outer_f()
