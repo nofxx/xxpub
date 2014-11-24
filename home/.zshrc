@@ -10,10 +10,12 @@
 # https://github.com/ryanb/dotfiles/blob/master/zshrc
 # http://www.rayninfo.co.uk/tips/zshtips.html
 #
+. /home/nofxx/.zsh/func/z.sh
 fpath=($fpath $HOME/.zsh/func)
 typeset -U fpath
 autoload -Uz compinit
 compinit
+
 # source $HOME/.zsh/plugins/_gem
 
 #
@@ -113,6 +115,9 @@ promptinit
 # prompt wunjo
 prompt grb
 
+
+alias wake="wol 00:24:21:13:5f:60"
+
 #
 #  Alias
 #
@@ -135,11 +140,13 @@ alias ..='cd ..'
 alias -g ...='cd ../..'
 alias -g ....='cd ../../..'
 alias -g .....='cd ../../../..'
+alias -g ......='cd ../../../../..'
+alias -g .......='cd ../../../../../..'
 alias -- -='cd -'
 
 # SERVICE
+alias s='systemctl'
 alias rc='sudo /etc/rc.d/'
-alias sservice='sudo /sbin/service'
 alias inid='sudo /etc/init.d/'
 
 # SSH
@@ -173,7 +180,7 @@ alias ys="sudo yaourt -Syu --aur"
 
 # AIRCRACK
 alias ard="sudo airdriver-ng"
-alias arm="sudo airmon-ng"
+#alias arm="sudo airmon-ng"
 alias ardo="sudo airdriver-ng loaded"
 alias ardu="sudo airdriver-ng unload"
 
@@ -209,19 +216,20 @@ alias github="firefox \`git config -l | grep 'remote.origin.url' | sed -En \
   's/remote.origin.url=git(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\3\/\4/p'\`"
 alias svnclean='rm -rf `find . -name .svn`'
 
-# RUBY
-alias 9="rvm use 1.9.2"
-alias 8="rvm use ree"
-alias r3="rvm use 1.9.1@rails3"
-alias r="ruby -v && gem env | grep gems"
+alias kr="killall ruby; killall livereload; killall node"
 
-# RAILS
-alias r=rails
-alias rs='rspec spec'
-alias ss='rails s &' # start up the beast
-alias sc='rails c'  # obvious
-alias aa='autospec &'
-alias aaa='AUTOFEATURE=true autospec &'
+# RUBY
+# alias 9="rvm use 1.9.2"
+# alias 8="rvm use ree"
+# alias r3="rvm use 1.9.1@rails3"
+# #alias r="ruby -v && gem env | grep gems"
+alias r=ruby
+alias rs='bundle exec rspec spec'
+alias sm='bundle exec rspec spec/models'
+alias sr='bundle exec rspec spec/requests'
+alias sw='bundle exec rspec spec/workers'
+alias aa='bundle exec guard'
+
 alias doom='rake db:drop && rake db:create && rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate && rake db:seed && rake db:migrate RAILS_ENV="test"'
 alias doomtest='rake db:drop RAILS_ENV="test" && rake db:create RAILS_ENV="test" && rake db:migrate RAILS_ENV="test"'
 alias rr='touch tmp/restart.txt'
@@ -236,27 +244,35 @@ alias -g M='more'
 alias -g H='head'
 alias -g T='tail'
 
-function e { emacs "$@"& }
+
+# # PS1 and PS2
+# export PS1="$(print '%{\e[1;34m%}%n%{\e[0m%}'):$(print '%{\e[0;34m%}%~%{\e[0m%}')$ "
+# export PS2="$(print '%{\e[0;34m%}>%{\e[0m%}')"
+
+#[[ -s "/home/nofxx/.rvm/scripts/rvm" ]] && source "/home/nofxx/.rvm/scripts/rvm"
+function e { $EDITOR "$@"& }
+
+function ss {
+  rspec spec/$1
+}
 
 function cdgem {
   cd /usr/lib/ruby/gems/1.8/gems/; cd `ls|grep $1|sort|tail -1`
 }
 
+function precmd {
+  /home/nofxx/.bin/terminal_title
+  _z --add "$(pwd -P)"
+}
+
+function title {
+    export TITLE="$*"
+}
+
 #
-#  Export Vars
+# Load profile vars!
 #
-export EDITOR="emacs"
-export BROWSER=links
-export XTERM="aterm +sb -geometry 80x29 -fg black -bg lightgoldenrodyellow -fn -xos4-terminus-medium-*-normal-*-14-*-*-*-*-*-iso8859-15"
-export LS_COLORS="di=31;1:ln=36;1:ex=31;1:*~=31;1:*.html=31;1:*.shtml=37;1"
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;32'
+if [ -f ~/.profile ]; then . ~/.profile; fi
 
-export NPM_HOME=~/.node
-export MAGLEV_HOME=~/.maglev
-
-export PATH="$NPM_HOME/bin:$MAGLEV_HOME/bin:$PATH:/usr/local/bin:/usr/local/sbin:/home/nofxx/scripts:/usr/local/cuda/bin" # :/home/nofxx/.rvm/bin"
-
-# # PS1 and PS2
-# export PS1="$(print '%{\e[1;34m%}%n%{\e[0m%}'):$(print '%{\e[0;34m%}%~%{\e[0m%}')$ "
-# export PS2="$(print '%{\e[0;34m%}>%{\e[0m%}')"
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

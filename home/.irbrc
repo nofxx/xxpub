@@ -1,9 +1,9 @@
 # -*- mode: ruby; -*-
 #require 'rubygems'
-%w{irb/completion irb/ext/save-history pp rubygems benchmark tempfile}.map(&method(:require))
+%w{irb/completion irb/ext/save-history benchmark tempfile}.map(&method(:require))
 
 # ap -> awesome_print
-%w{what_methods ap}.each do |mod|
+%w{what_methods looksee did_you_mean ap pp}.each do |mod|
   begin
   require mod
   rescue LoadError => e
@@ -47,7 +47,7 @@ end
 # Class
 #
 class Object
-   include Hirb::Console
+  include Hirb::Console if const_defined?("Hirb")
   def local_methods(obj = self)
     (obj.methods - (obj.class.superclass || Object).instance_methods).map(&:to_s).sort
   end
@@ -88,7 +88,7 @@ end
 # b n, lambda{ }, lambda{ } ...
 def b(*stuff)
   rep, stuff = stuff.partition{ |s| s.kind_of? Numeric }
-  rep.length ||= [1_000_000]
+  rep << 1_000 if rep.empty?
   rep.each do |r|
     puts "\nRunning -> #{r} times"
     Benchmark.bmbm do |b|
@@ -157,11 +157,14 @@ alias vi vim
 # Rails stuff
 #
 
-# Log to STDOUT if in Rails
-# if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
-#   require 'logger'
-#   RAILS_DEFAULT_LOGGER = Logger.new(STDOUT)
-# end
+# .irbrc to log goodies like SQL/Mongo queries to $stdout if in Rails 3 console
+if defined?(Rails) && Rails.respond_to?(:logger)
+  require 'logger'
+  Rails.logger = Logger.new($stdout)
+  if defined?(Mongoid)
+    Mongoid.logger = Rails.logger
+  end
+end
 
 # # Called after the irb session is initialized and Rails has
 # # been loaded (props: Mike Clark).

@@ -1,16 +1,29 @@
 [user]
-  name = Marcos Augusto
+  name = Marcos Piccinini
   email = x@nofxx.com
+#[apply]
+#  whitespace = fix
 [i18n]
    commitencoding = UTF8
+[core]
+  # Use custom `.gitignore` and `.gitattributes`
+  #excludesfile = ~/.gitignore
+  #attributesfile = ~/.gitattributes
+  # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
+  #whitespace = space-before-tab,indent-with-non-tab,trailing-space
 [alias]
-  st = status
+  p = push
+  s = status
   ci = commit
   co = checkout
   br = branch
   bs = bisect
   cp = cherry-pick
+  l = log --pretty=oneline -n 20 --graph
+  undo = reset --soft HEAD^
+  undopush = push -f origin HEAD^:master
 [color]
+  ui = auto
   diff = auto
   status = auto
   branch = auto
@@ -18,3 +31,35 @@
 [merge]
   tool = opendiff
   summary = true
+[github]
+  user = nofxx
+  token = 326a063d5cfd4947b9e8afc71e913cc6
+[push]
+  default = current
+[giggle]
+  main-window-maximized = false
+  main-window-geometry = 1075x745+513+95
+  file-view-vpane-position = 280
+  main-window-view = HistoryView
+  history-view-vpane-position = 456
+[gc]
+  auto = 1
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+
+# URL shorthands
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+[core]
+	excludesfile = /home/nofxx/.gitignore
