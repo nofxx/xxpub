@@ -1,18 +1,11 @@
-yaourt -S xorg xfce4 emacs ruby git base-devel firefox thunderbird \
-        vlc virtualbox_bin ttf-inconsolata ttf-bitstream-vera ttf-dejavu\
-        libxslt sudo erlang rabbitmq wireshark kismet nmap wireless_tools\
-        nodejs opera redis postgresql postgis tokyocabinet mongodb unrar\
-        ffmpeg flashplugin ejabberd apache-ant android-sdk aircrack-ng\
-        gitg qgit hicolor-icon-theme nvidia-utils openssh sqlite3 synergy\
-        gstreamer0.10-good gstreamer0.10-bad gstreamer0.10-ugly pidgin\
+#!/usr/bin/env bash
 
 
+gem install rvm bundler what_methods dbf unicorn eventmachine bugs_bunny\
+    hirb symbolize rubocop rspec rspec-rails thin nokogiri pry redis ghi\
+    wirble sidekiq awesome_print jeweler what_methods did_you_mean git-up
 
-gem install rvm bundler what_methods thin unicorn eventmachine bugs_bunny\
-    wirble hirb awesome_print ghi jeweler
 
-
-
-rvm install ree
-rvm install rbx
-rvm install 1.9.2
+# rvm install ree
+# rvm install rbx
+# rvm install 1.9.2
