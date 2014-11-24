@@ -7,4 +7,5 @@
 *.so
 *.linkinfo
 *.bundle
+*.pyc
 Makefile

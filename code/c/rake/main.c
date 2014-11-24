@@ -11,11 +11,11 @@ int main() {
   //t.value = (unsigned)0x1DBA5C60;
   //printf ("val = 0x%08X\n", p.value);
   printf("%d days %d hours %d minutes %d seconds\n", t.info.days, t.info.hours, t.info.minutes, t.info.seconds);
+
+
   return 0;
 }
 
 
-"1110"
-
-
-"11" "10"
+// "1110"
+// "11" "10"

@@ -24,7 +24,7 @@ int add(int a, int b) {
 }
 
 void sayhi(){
-  cout << "Hey there girl!" << endl;
+  cout << "Do you feel lucky?" << endl;
 }
 
 struct girl {
@@ -58,6 +58,9 @@ int main() {
   int ary[5][5];
   ary[1][1] = 8;
   x += age;
+
+  cout << "Got ary!";
+  cout << ary[1][1];
 
   float flutua = 56.887;
   double boia  = 56.9999;
@@ -147,7 +150,7 @@ int main() {
   char bytec = '1';
   cout << int(bytec);
 
-  char* cmdbuf;
+  // char* cmdbuf;
 
   cout << "\n" "auto " "concat" << endl;
 
@@ -176,4 +179,3 @@ int main() {
   return 0;
 
 }
-
