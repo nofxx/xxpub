@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
 
+
 gem install rvm bundler what_methods dbf unicorn eventmachine bugs_bunny\
     hirb symbolize rubocop rspec rspec-rails thin nokogiri pry redis ghi\
-    wirble sidekiq awesome_print jeweler what_methods did_you_mean git-up
-
+    wirble sidekiq awesome_print jeweler what_methods did_you_mean git-up\
+    mongoid nobrainer dalli clockwork fabrication coffee-rails libv8\
+    carrierwave capybara guard guard-rspec fuubar haml sass log4r rails\
+    omniauth money mechanize mini_magick webmock strip_attributes
 
 # rvm install ree
 # rvm install rbx
