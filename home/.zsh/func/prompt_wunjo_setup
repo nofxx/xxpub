@@ -129,6 +129,8 @@ prompt_wunjo_setup() {
   PROMPT+="\$(prompt_wunjo_scm_branch)"
   PROMPT+=" $pc[#]%#$pc[reset] "
 
+  export PROMPTITLE PROMPT
+
   RPROMPT=
   if [ $verbose ]; then
     RPROMPT+="$p_date "
