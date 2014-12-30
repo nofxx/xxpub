@@ -1,6 +1,10 @@
+# CHANGE HERE
 [user]
   name = Marcos Piccinini
   email = x@nofxx.com
+[github]
+  user = nofxx
+# THRU HERE
 #[apply]
 #  whitespace = fix
 [i18n]
@@ -10,7 +14,8 @@
   #excludesfile = ~/.gitignore
   #attributesfile = ~/.gitattributes
   # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-  #whitespace = space-before-tab,indent-with-non-tab,trailing-space
+  whitespace = space-before-tab,trailing-space 
+  #indent-with-non-tab	
 [alias]
   p = push
   s = status
@@ -31,9 +36,6 @@
 [merge]
   tool = opendiff
   summary = true
-[github]
-  user = nofxx
-  token = 326a063d5cfd4947b9e8afc71e913cc6
 [push]
   default = current
 [giggle]
@@ -61,5 +63,5 @@
   pushInsteadOf = "git://gist.github.com/"
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
-[core]
-	excludesfile = /home/nofxx/.gitignore
+#[core]
+# excludesfile = /home/nofxx/.gitignore
