@@ -1,21 +1,21 @@
 # CHANGE HERE
 [user]
-  name = Marcos Piccinini
-  email = x@nofxx.com
+  name = YOUR NAME
+  email = YOUR EMAIL
 [github]
-  user = nofxx
+  user = GITHUB USER
 # THRU HERE
 #[apply]
 #  whitespace = fix
 [i18n]
-   commitencoding = UTF8
+  commitencoding = UTF8
 [core]
   # Use custom `.gitignore` and `.gitattributes`
   #excludesfile = ~/.gitignore
   #attributesfile = ~/.gitattributes
   # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-  whitespace = space-before-tab,trailing-space 
-  #indent-with-non-tab	
+  whitespace = space-before-tab,trailing-space
+  #indent-with-non-tab
 [alias]
   p = push
   s = status
@@ -36,6 +36,7 @@
 [merge]
   tool = opendiff
   summary = true
+  ff = only
 [push]
   default = current
 [giggle]
@@ -46,6 +47,9 @@
   history-view-vpane-position = 456
 [gc]
   auto = 1
+[fetch]
+  prune = true
+
 [branch "master"]
   remote = origin
   merge = refs/heads/master
