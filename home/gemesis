@@ -9,7 +9,7 @@ gem install bundler what_methods log4r unicorn eventmachine rails libv8\
     omniauth dbf mechanize mini_magick excon webmock strip_attributes\
     yard ffi money spring guard guard-spring guard-rubocop guard-rspec\
     kiqstand coffee-rails airbrake better_errors faker fog geopolitical\
-		paint georuby rgeo hooray launchy jbuilder ruby-lint
+		paint georuby rgeo hooray launchy jbuilder ruby-lint git-up
 
 
 # rvm install ree
