@@ -9,7 +9,8 @@ gem install god bundler what_methods log4r unicorn eventmachine rails\
     omniauth dbf mechanize mini_magick excon webmock strip_attributes\
     yard ffi money spring guard guard-spring guard-rubocop guard-rspec\
     kiqstand coffee-rails airbrake better_errors faker fog geopolitical\
-    paint georuby rgeo hooray launchy jbuilder ruby-lint libv8 warbler
+    paint georuby rgeo hooray launchy jbuilder ruby-lint libv8 warbler\
+    capistrano
 
 
 # rvm install ree
