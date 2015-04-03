@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-gem install god bundler what_methods log4r unicorn eventmachine rails\
+gem install god bundler what_methods unicorn eventmachine rails\
     hirb symbolize rubocop rspec minitest thin nokogiri pry redis ghi\
     wirble sidekiq clockwork awesome_print what_methods looksee git-up\
     jeweler mongoid nobrainer dalli sequel rom fabrication capybara \
@@ -9,9 +9,5 @@ gem install god bundler what_methods log4r unicorn eventmachine rails\
     omniauth dbf mechanize mini_magick excon webmock strip_attributes\
     yard ffi money spring guard guard-spring guard-rubocop guard-rspec\
     kiqstand coffee-rails airbrake better_errors faker fog geopolitical\
-    paint georuby rgeo hooray launchy jbuilder ruby-lint libv8 warbler
-
-
-# rvm install ree
-# rvm install rbx
-# rvm install 1.9.2
+    paint georuby rgeo hooray launchy jbuilder ruby-lint libv8 warbler\
+    namie phonie addressie mongoid-geospatial mongoid-ids mongoid-slugs\
