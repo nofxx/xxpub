@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+puts "      Voltage Divider ÷" 
+puts '----/\/\/\---|---/\/\/\----'
+puts
+
+
+if ARGV.empty? || ARGV.size < 3
+  puts "Usage:  vd V R1 R2"
+  puts	
+else
+  vin, r1, r2 = *ARGV.map(&:to_f)
+  puts "Voltage divider #{vin}V  -----[#{r1}Ω]---÷---[#{r2}Ω]----"
+  puts	
+
+  1.upto(vin).each do |i|
+    vout = r2 / (r1 + r2) * i
+    puts "Vin #{i.to_s.rjust(3, ' ')}V Vout #{vout}V"
+  end
+
+  
+		
+  puts '-------------/\/\/\--------------'
+end
+
+
+
+
+

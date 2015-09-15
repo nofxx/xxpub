@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+chunk = ARGV.join
+
+head, line  = chunk.split("&line=")
+trash, file = head.split("file://")
+file = file.gsub!("%2F", "/")
+
+args =  `ps aux | grep emac[s]` == "" ? "c" : ""
+
+# puts "Running file #{file} ##{line} with args #{args}"
+`emacsclient -n#{args} +#{line} "#{file}"`
