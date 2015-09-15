@@ -5,3 +5,4 @@ yaourt -S xorg xfce4 emacs ruby git base-devel firefox thunderbird \
         ffmpeg flashplugin ejabberd apache-ant android-sdk aircrack-ng\
         gitg qgit hicolor-icon-theme nvidia-utils openssh sqlite3 synergy\
         gstreamer0.10-good gstreamer0.10-bad gstreamer0.10-ugly pidgin\
+        phantomjs magit
